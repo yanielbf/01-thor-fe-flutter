@@ -1,4 +1,4 @@
-import 'package:cubanfood_mobile_flutter/app/utils/responsive/device_screen_type.dart';
+import 'package:thor_flutter/app/utils/responsive/device_screen_type.dart';
 import 'package:flutter/widgets.dart';
 
 DeviceScreenType getDeviceType(MediaQueryData mediaQuery) {

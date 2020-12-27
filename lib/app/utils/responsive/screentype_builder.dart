@@ -1,5 +1,5 @@
-import 'package:cubanfood_mobile_flutter/app/utils/responsive/device_screen_type.dart';
-import 'package:cubanfood_mobile_flutter/app/utils/responsive/responsive_builder.dart';
+import 'package:thor_flutter/app/utils/responsive/device_screen_type.dart';
+import 'package:thor_flutter/app/utils/responsive/responsive_builder.dart';
 import 'package:flutter/material.dart';
 
 class ScreenTypeBuilder extends StatelessWidget {

@@ -1,12 +1,12 @@
-import 'package:cubanfood_mobile_flutter/app/utils/responsive/sizing_information.dart';
-import 'package:cubanfood_mobile_flutter/app/utils/responsive/ui_device_screen.dart';
+import 'package:thor_flutter/app/utils/responsive/sizing_information.dart';
+import 'package:thor_flutter/app/utils/responsive/ui_device_screen.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveBuilder extends StatelessWidget {
   final Widget Function(
-      BuildContext context,
-      SizingInformation sizingInformation,
-      ) builder;
+    BuildContext context,
+    SizingInformation sizingInformation,
+  ) builder;
 
   const ResponsiveBuilder({Key key, this.builder}) : super(key: key);
 
@@ -18,7 +18,7 @@ class ResponsiveBuilder extends StatelessWidget {
         deviceScreenType: getDeviceType(mediaQuery),
         screenSize: mediaQuery.size,
         localWidgetSize:
-        Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
+            Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
       );
       return builder(context, sizingInformation);
     });
