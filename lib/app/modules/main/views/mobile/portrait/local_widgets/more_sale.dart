@@ -13,7 +13,9 @@ class MoreSaleMain extends StatelessWidget {
     return GetBuilder<MainController>(builder: (_) {
       return SideInAnimation(6,
           child: VerticalList(
-              itemCount: _.productsMoreSale,
+              itemCount: _.productsMoreSale != null
+                  ? _.productsMoreSale['products']
+                  : [],
               onTapItem: (item) {
                 _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
                     arguments: item.id);

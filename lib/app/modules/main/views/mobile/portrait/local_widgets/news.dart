@@ -13,7 +13,7 @@ class NewsMain extends StatelessWidget {
     return GetBuilder<MainController>(builder: (_) {
       return SideInAnimation(5,
           child: HorizontalListView(
-              itemCount: _.productsNew,
+              itemCount: _.productsNew != null ? _.productsNew['products'] : [],
               onTapItem: (item) {
                 _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
                     arguments: item.id);

@@ -10,4 +10,5 @@ class AppRoutes {
   static const HISTORY = "favorites";
   static const PROFILE = "profile";
   static const PRODUCTDETAIL = "productdetail";
+  static const PRODUCTSBYCATEGORY = "productsbycategory";
 }

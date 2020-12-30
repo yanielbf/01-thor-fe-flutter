@@ -17,10 +17,10 @@ class MainController extends GetxController {
   LauncherUrl launcher = Get.find<LauncherUrl>();
 
   List<Category> categories = [];
-  List<Product> productsNew = [];
-  List<Product> productsMoreSale = [];
-  List<Product> productsSpecialOffer = [];
-  List<Product> productsWaitingStock = [];
+  Map<String, dynamic> productsNew;
+  Map<String, dynamic> productsMoreSale;
+  Map<String, dynamic> productsSpecialOffer;
+  Map<String, dynamic> productsWaitingStock;
   List<String> productsImage = [];
   List<BannerM> banners = [];
 
@@ -43,7 +43,8 @@ class MainController extends GetxController {
       productsMoreSale = data.moreSales;
       productsSpecialOffer = data.specialOffer;
       productsWaitingStock = data.waitingStock;
-      productsImage = productsSpecialOffer.map((e) => e.image).toList();
+      productsImage =
+          productsSpecialOffer['products'].map((e) => e.image).toList().cast<String>();
       banners = data.banners;
       update();
       //Get.back();

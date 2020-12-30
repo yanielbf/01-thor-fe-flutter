@@ -16,7 +16,7 @@ class HorizontalListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Screen.width(context),
-      height: 230.0,
+      height: 260.0,
       child: ListView.builder(
         itemCount: itemCount.length,
         scrollDirection: Axis.horizontal,

@@ -13,7 +13,9 @@ class SpecialOffersMain extends StatelessWidget {
     return GetBuilder<MainController>(builder: (_) {
       return SideInAnimation(3,
           child: HorizontalListView(
-              itemCount: _.productsSpecialOffer,
+              itemCount: _.productsSpecialOffer != null
+                  ? _.productsSpecialOffer['products']
+                  : [],
               onTapItem: (item) {
                 _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
                     arguments: item.id);

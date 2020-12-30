@@ -6,15 +6,18 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:thor_flutter/app/global_widgets/animation/fade_animation.dart';
 import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/sub_head_widget.dart';
+import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/modules/main/main_controller.dart';
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/categories.dart';
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/more_sale.dart';
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/news.dart';
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/slider.dart';
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/special_offers.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
 
 class MainPortraitView extends StatelessWidget {
+  AppController _appController = Get.find<AppController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(builder: (_) {
@@ -59,13 +62,17 @@ class MainPortraitView extends StatelessWidget {
                 ),
                 SizedBox(height: 15.0),
                 CategoryMain(),
-                SizedBox(height: 20.0),
+                SizedBox(height: 40.0),
                 SideInAnimation(
                   3,
                   child: Subhead(
                     title: 'Ofertas especiales',
                     onTap: () {
-                      //Get.to(BrowseProductPage());
+                      if (_.productsSpecialOffer != null) {
+                        _appController.navigateToRoute(
+                            AppRoutes.PRODUCTSBYCATEGORY,
+                            arguments: _.productsSpecialOffer['id']);
+                      }
                     },
                   ),
                 ),
@@ -88,7 +95,11 @@ class MainPortraitView extends StatelessWidget {
                   child: Subhead(
                     title: 'Nuevos',
                     onTap: () {
-                      //Get.to(BrowseProductPage());
+                      if (_.productsNew != null) {
+                        _appController.navigateToRoute(
+                            AppRoutes.PRODUCTSBYCATEGORY,
+                            arguments: _.productsNew['id']);
+                      }
                     },
                   ),
                 ),
@@ -122,7 +133,11 @@ class MainPortraitView extends StatelessWidget {
                   child: Subhead(
                     title: 'Más vendidos',
                     onTap: () {
-                      //Get.to(BrowseProductPage());
+                      if (_.productsMoreSale != null) {
+                        _appController.navigateToRoute(
+                            AppRoutes.PRODUCTSBYCATEGORY,
+                            arguments: _.productsMoreSale['id']);
+                      }
                     },
                   ),
                 ),

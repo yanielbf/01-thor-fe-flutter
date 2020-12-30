@@ -13,25 +13,43 @@ class MainScreen {
     @required this.banners,
   });
 
-  List<Product> moreSales;
-  List<Product> specialOffer;
-  List<Product> news;
-  List<Product> waitingStock;
+  Map<String, dynamic> moreSales;
+  Map<String, dynamic> specialOffer;
+  Map<String, dynamic> news;
+  Map<String, dynamic> waitingStock;
   List<Category> categories;
   List<BannerM> banners;
 
   factory MainScreen.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> moreSales = {
+      'id': json['mas-vendidos']['id'],
+      'products': (json['mas-vendidos']['products'] as List)
+          .map((e) => Product.fromJson(e))
+          .toList()
+    };
+    Map<String, dynamic> specialOffer = {
+      'id': json['oferta-especial']['id'],
+      'products': (json['oferta-especial']['products'] as List)
+          .map((e) => Product.fromJson(e))
+          .toList()
+    };
+    Map<String, dynamic> news = {
+      'id': json['nuevos']['id'],
+      'products': (json['nuevos']['products'] as List)
+          .map((e) => Product.fromJson(e))
+          .toList()
+    };
+    Map<String, dynamic> waitingStock = {
+      'id': json['esperando-por-stock']['id'],
+      'products': (json['esperando-por-stock']['products'] as List)
+          .map((e) => Product.fromJson(e))
+          .toList()
+    };
     return MainScreen(
-      moreSales: (json['mas-vendidos'] as List)
-          .map((e) => Product.fromJson(e))
-          .toList(),
-      specialOffer: (json['oferta-especial'] as List)
-          .map((e) => Product.fromJson(e))
-          .toList(),
-      news: (json['nuevos'] as List).map((e) => Product.fromJson(e)).toList(),
-      waitingStock: (json['esperando-por-stock'] as List)
-          .map((e) => Product.fromJson(e))
-          .toList(),
+      moreSales: moreSales,
+      specialOffer: specialOffer,
+      news: news,
+      waitingStock: waitingStock,
       categories: (json['categories'] as List)
           .map((e) => Category.fromJson(e))
           .toList(),

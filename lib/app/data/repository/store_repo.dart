@@ -10,6 +10,10 @@ class StoreRepo {
     return _storeApi.requestMainScreenProducts();
   }
 
+  Future<List<Product>> requestProductsByategory(int id) async {
+    return _storeApi.requestProductsByCategory(id);
+  }
+
   Future<Product> requestProductDetail(int id) async {
     return _storeApi.requestProductDetail(id);
   }

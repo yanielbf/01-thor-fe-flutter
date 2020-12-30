@@ -1,26 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
-import 'package:thor_flutter/app/utils/screens.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductGridCard extends StatelessWidget {
   final Function onTap;
   final Product product;
-  final bool isHorizontalList;
 
-  const ProductCard(
-      {Key key,
-      @required this.onTap,
-      @required this.product,
-      @required this.isHorizontalList})
+  const ProductGridCard({Key key, @required this.onTap, this.product})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: isHorizontalList ? 15.0 : 0.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(12.0),
         onTap: onTap,
@@ -35,9 +30,9 @@ class ProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.0),
                     child: CachedNetworkImage(
                       imageUrl: product.image,
-                      width: Screen.width(context),
-                      fit: BoxFit.fitWidth,
-                      height: 130.0,
+                      height: 150.0,
+                      fit: BoxFit.cover,
+                      width: Get.width,
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -58,7 +53,7 @@ class ProductCard extends StatelessWidget {
                             .headline4
                             .copyWith(color: Theme.of(context).primaryColor),
                         textAlign: TextAlign.left,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(width: 5.0),
@@ -71,7 +66,7 @@ class ProductCard extends StatelessWidget {
                                   .copyWith(
                                       decoration: TextDecoration.lineThrough),
                               textAlign: TextAlign.left,
-                              maxLines: 1,
+                              maxLines: 2,
                             )
                           : Container(),
                     ],

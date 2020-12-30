@@ -11,6 +11,13 @@ class StoreAPI {
     return MainScreen.fromJson(response.data['data']);
   }
 
+  Future<List<Product>> requestProductsByCategory(int id) async {
+    var response = await _dio.get('/store/productsbycategory/$id');
+    return (response.data['data'] as List)
+        .map((e) => Product.fromJson(e))
+        .toList();
+  }
+
   Future<Product> requestProductDetail(int id) async {
     var response = await _dio.get('/store/product-details/$id');
     return Product.fromJson(response.data['data']);
