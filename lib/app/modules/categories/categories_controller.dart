@@ -37,7 +37,7 @@ class CategoriesController extends GetxController {
         if (!noadd) {
           breadcrumb.add({'id': id, 'name': name});
         }
-        categoryName = name;
+        categoryName = name ?? 'Categorías';
         categories = await _storeRepo.requestChildrenCategories(id);
         products = await _storeRepo.requestProductsByCategory(id);
       }
