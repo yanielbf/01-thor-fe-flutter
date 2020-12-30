@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/modules/categories/categories_binding.dart';
+import 'package:thor_flutter/app/modules/categories/categories_page.dart';
 import 'package:thor_flutter/app/modules/forgot_password/forgot_binding.dart';
 import 'package:thor_flutter/app/modules/forgot_password/forgot_page.dart';
 import 'package:thor_flutter/app/modules/info/info_binding.dart';
@@ -49,5 +51,9 @@ class AppPages {
         name: AppRoutes.PRODUCTSBYCATEGORY,
         page: () => ProductsByCategoryPage(),
         binding: ProductsByCategoryBinding()),
+    GetPage(
+        name: AppRoutes.CATEGORIES,
+        page: () => CategoriesPage(),
+        binding: CategoriesBinding()),
   ];
 }

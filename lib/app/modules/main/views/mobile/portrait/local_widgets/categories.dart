@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/category_circle_widget.dart';
+import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/modules/main/main_controller.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 
 class CategoryMain extends StatelessWidget {
+  AppController _appController = Get.find<AppController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(builder: (_) {
@@ -22,7 +25,8 @@ class CategoryMain extends StatelessWidget {
                 return CategoryCircle(
                   category: category,
                   onTap: () {
-                    //Get.to(BrowseProductPage());
+                    _appController.navigateToRoute(AppRoutes.PRODUCTSBYCATEGORY,
+                        arguments: {'id': category.id, 'name': category.name});
                   },
                 );
               },

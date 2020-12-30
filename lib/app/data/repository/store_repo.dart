@@ -1,3 +1,4 @@
+import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/mainscreen.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
@@ -10,11 +11,19 @@ class StoreRepo {
     return _storeApi.requestMainScreenProducts();
   }
 
-  Future<List<Product>> requestProductsByategory(int id) async {
+  Future<List<Product>> requestProductsByCategory(int id) async {
     return _storeApi.requestProductsByCategory(id);
   }
 
   Future<Product> requestProductDetail(int id) async {
     return _storeApi.requestProductDetail(id);
+  }
+
+  Future<List<Category>> requestRootCategories() async {
+    return _storeApi.requestRootCategories();
+  }
+
+  Future<List<Category>> requestChildrenCategories(int id) async {
+    return _storeApi.requestChildrenCategories(id);
   }
 }

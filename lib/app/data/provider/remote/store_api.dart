@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/mainscreen.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 
@@ -15,6 +16,20 @@ class StoreAPI {
     var response = await _dio.get('/store/productsbycategory/$id');
     return (response.data['data'] as List)
         .map((e) => Product.fromJson(e))
+        .toList();
+  }
+
+  Future<List<Category>> requestRootCategories() async {
+    var response = await _dio.get('/categories/rootcategories');
+    return (response.data['data'] as List)
+        .map((e) => Category.fromJson(e))
+        .toList();
+  }
+
+  Future<List<Category>> requestChildrenCategories(int id) async {
+    var response = await _dio.get('/categories/firstdescendentcategories/$id');
+    return (response.data['data'] as List)
+        .map((e) => Category.fromJson(e))
         .toList();
   }
 

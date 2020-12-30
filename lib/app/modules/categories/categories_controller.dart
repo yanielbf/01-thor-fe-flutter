@@ -1,14 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/app/progress_indicator.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 
-class ProductsByCategoryController extends GetxController {
+class CategoriesController extends GetxController {
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
 
+  List<Category> categories = [];
+  List<Map<String, dynamic>> breadcrumb = [
+    {'id': null, 'name': 'Categori'}
+  ];
   List<Product> products = [];
   String categoryName = '';
 
@@ -19,15 +24,19 @@ class ProductsByCategoryController extends GetxController {
   }
 
   void _bootstrap() async {
-    Map<String, dynamic> args = Get.arguments;
-    categoryName = args['name'];
-    await getProducts(args['id']);
+    await getCategories();
   }
 
-  Future<void> getProducts(int id) async {
+  Future<void> getCategories({int id = null, String name = null}) async {
     ProggresIndicatorCC.processRequest();
     try {
-      products = await _storeRepo.requestProductsByCategory(id);
+      if (id == null) {
+        categories = await _storeRepo.requestRootCategories();
+      } else {
+        categoryName = name;
+        categories = await _storeRepo.requestChildrenCategories(id);
+        products = await _storeRepo.requestProductsByCategory(id);
+      }
       update();
       Get.back();
     } on DioError catch (e) {

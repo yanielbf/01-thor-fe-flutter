@@ -20,6 +20,7 @@ class ProductsByCategoryPortraitView extends StatelessWidget {
     return GetBuilder<ProductsByCategoryController>(builder: (_) {
       return Scaffold(
         appBar: AppBar(
+          title: Text(_.categoryName),
           elevation: 0.0,
         ),
         body: StaggeredGridView.countBuilder(

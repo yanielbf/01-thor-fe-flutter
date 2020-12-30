@@ -43,8 +43,10 @@ class MainController extends GetxController {
       productsMoreSale = data.moreSales;
       productsSpecialOffer = data.specialOffer;
       productsWaitingStock = data.waitingStock;
-      productsImage =
-          productsSpecialOffer['products'].map((e) => e.image).toList().cast<String>();
+      productsImage = productsSpecialOffer['products']
+          .map((e) => e.image)
+          .toList()
+          .cast<String>();
       banners = data.banners;
       update();
       //Get.back();
@@ -66,6 +68,8 @@ class MainController extends GetxController {
 
   void navigateFromBanner(BannerM banner) {
     if (banner.linkType == 'category') {
+      _appController.navigateToRoute(AppRoutes.PRODUCTSBYCATEGORY,
+          arguments: {'id': banner.linkResource, 'name': banner.title});
     } else if (banner.linkType == 'product') {
       _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
           arguments: banner.linkResource);

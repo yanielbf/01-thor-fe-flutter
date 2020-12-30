@@ -58,7 +58,7 @@ class ProductCard extends StatelessWidget {
                             .headline4
                             .copyWith(color: Theme.of(context).primaryColor),
                         textAlign: TextAlign.left,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(width: 5.0),
@@ -71,7 +71,7 @@ class ProductCard extends StatelessWidget {
                                   .copyWith(
                                       decoration: TextDecoration.lineThrough),
                               textAlign: TextAlign.left,
-                              maxLines: 1,
+                              maxLines: 2,
                             )
                           : Container(),
                     ],

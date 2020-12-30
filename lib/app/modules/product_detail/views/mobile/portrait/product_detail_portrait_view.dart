@@ -20,6 +20,7 @@ class ProductDetailPortraitView extends StatelessWidget {
       }
       return Scaffold(
         appBar: AppBar(
+          title: Text(_.product.name),
           actions: [
             IconButton(
               icon: Icon(Icons.search),

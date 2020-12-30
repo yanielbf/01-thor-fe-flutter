@@ -23,7 +23,10 @@ class MainPortraitView extends StatelessWidget {
     return GetBuilder<MainController>(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          leading: Container(),
+          leading: Padding(
+            padding: EdgeInsets.all(10),
+            child: Image.asset('assets/images/logo_simple.png'),
+          ),
           title: Text('Thor provider',
               style: Theme.of(context).textTheme.headline1),
           actions: <Widget>[
@@ -56,7 +59,7 @@ class MainPortraitView extends StatelessWidget {
                   child: Subhead(
                     title: 'Category',
                     onTap: () {
-                      //Get.to(BrowseCategoryPage());
+                      _appController.navigateToRoute(AppRoutes.CATEGORIES);
                     },
                   ),
                 ),
@@ -71,7 +74,10 @@ class MainPortraitView extends StatelessWidget {
                       if (_.productsSpecialOffer != null) {
                         _appController.navigateToRoute(
                             AppRoutes.PRODUCTSBYCATEGORY,
-                            arguments: _.productsSpecialOffer['id']);
+                            arguments: {
+                              'id': _.productsSpecialOffer['id'],
+                              'name': 'Ofertas especiales'
+                            });
                       }
                     },
                   ),
@@ -98,7 +104,10 @@ class MainPortraitView extends StatelessWidget {
                       if (_.productsNew != null) {
                         _appController.navigateToRoute(
                             AppRoutes.PRODUCTSBYCATEGORY,
-                            arguments: _.productsNew['id']);
+                            arguments: {
+                              'id': _.productsNew['id'],
+                              'name': 'Nuevos'
+                            });
                       }
                     },
                   ),
@@ -136,7 +145,10 @@ class MainPortraitView extends StatelessWidget {
                       if (_.productsMoreSale != null) {
                         _appController.navigateToRoute(
                             AppRoutes.PRODUCTSBYCATEGORY,
-                            arguments: _.productsMoreSale['id']);
+                            arguments: {
+                              'id': _.productsMoreSale['id'],
+                              'name': 'Más vendidos'
+                            });
                       }
                     },
                   ),
