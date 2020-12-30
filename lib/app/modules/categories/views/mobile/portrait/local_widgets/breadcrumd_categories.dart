@@ -10,9 +10,18 @@ class BreadCrumbCategories extends StatelessWidget {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 18.0),
         child: BreadCrumb.builder(
-          itemCount: 8,
+          itemCount: _.breadcrumb.length,
           builder: (index) {
-            return BreadCrumbItem(content: Text('Item$index'));
+            Map<String, dynamic> item = _.breadcrumb[index];
+            return BreadCrumbItem(
+                content: GestureDetector(
+                    child: Text(item['name']),
+                    onTap: () {
+                      if (index + 1 < _.breadcrumb.length) {
+                        _.navigateFromBreadcrumb(
+                            index, item['id'], item['name']);
+                      }
+                    }));
           },
           divider: Icon(Icons.chevron_right),
         ),

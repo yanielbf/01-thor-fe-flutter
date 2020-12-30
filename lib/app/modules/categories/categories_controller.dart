@@ -12,7 +12,7 @@ class CategoriesController extends GetxController {
 
   List<Category> categories = [];
   List<Map<String, dynamic>> breadcrumb = [
-    {'id': null, 'name': 'Categori'}
+    {'id': null, 'name': 'Categorías'}
   ];
   List<Product> products = [];
   String categoryName = '';
@@ -27,12 +27,16 @@ class CategoriesController extends GetxController {
     await getCategories();
   }
 
-  Future<void> getCategories({int id = null, String name = null}) async {
+  Future<void> getCategories(
+      {int id = null, String name = null, bool noadd = false}) async {
     ProggresIndicatorCC.processRequest();
     try {
       if (id == null) {
         categories = await _storeRepo.requestRootCategories();
       } else {
+        if (!noadd) {
+          breadcrumb.add({'id': id, 'name': name});
+        }
         categoryName = name;
         categories = await _storeRepo.requestChildrenCategories(id);
         products = await _storeRepo.requestProductsByCategory(id);
@@ -53,5 +57,14 @@ class CategoriesController extends GetxController {
           title: TitleError(title: 'Ha ocurrido un error'),
           content: Text(e.toString())));
     }
+  }
+
+  void navigateFromBreadcrumb(int index, int id, String name) {
+    if (index == 0) {
+      breadcrumb = breadcrumb.sublist(0, 1);
+    } else {
+      breadcrumb = breadcrumb.sublist(0, index + 1);
+    }
+    getCategories(id: id, name: index == 0 ? '' : name, noadd: true);
   }
 }

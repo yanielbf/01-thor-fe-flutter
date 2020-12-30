@@ -31,7 +31,10 @@ class CategoriesPortraitView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                BreadCrumbCategories(),
+                SizedBox(
+                  height: 15.0,
+                ),
+                _.breadcrumb.length > 1 ? BreadCrumbCategories() : Container(),
                 _.categories.length == 0
                     ? Container()
                     : SideInAnimation(
