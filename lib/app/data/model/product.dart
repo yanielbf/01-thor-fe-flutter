@@ -9,6 +9,7 @@ class Product {
       @required this.discountPercentage,
       @required this.promotional,
       @required this.image,
+      @required this.rating,
       this.images,
       this.description,
       this.variations});
@@ -17,6 +18,7 @@ class Product {
   String name;
   int salesPrice;
   int realStock;
+  int rating;
   int discountPercentage;
   int promotional;
   String image;
@@ -32,8 +34,11 @@ class Product {
       discountPercentage: json["discount_percentage"],
       promotional: json["promotional"],
       description: json["description"] != null ? json["description"] : '',
+      rating: json["rating"],
       image: json["image"],
-      images: json["images"] != null ? json["images"] : [],
+      images: json["images"] != null
+          ? (json["images"] as List).map((e) => e).toList().cast<String>()
+          : [],
       variations: json["variations"] != null
           ? (json["variations"] as List)
               .map((e) => Product.fromJson(e))

@@ -18,11 +18,16 @@ class ProductDetailController extends GetxController {
   }
 
   void _bootstrap() async {
-    int id = Get.arguments;
-    await _getProductDetail(id);
+    int id = 0;
+    if (Get.arguments is String) {
+      id = int.parse(Get.arguments);
+    } else {
+      id = Get.arguments;
+    }
+    await getProductDetail(id);
   }
 
-  Future<void> _getProductDetail(int id) async {
+  Future<void> getProductDetail(int id) async {
     ProggresIndicatorCC.processRequest();
     try {
       product = await _storeRepo.requestProductDetail(id);

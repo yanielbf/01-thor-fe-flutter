@@ -79,12 +79,13 @@ class AppController extends GetxController {
     }
   }
 
-  void navigateToRoute(String route, {bool removeStack = false}) {
+  void navigateToRoute(String route,
+      {bool removeStack = false, dynamic arguments}) {
     _activeRoute = route;
     if (removeStack) {
       Get.offAllNamed(route);
     } else {
-      Get.toNamed(route);
+      Get.toNamed(route, arguments: arguments);
     }
   }
 

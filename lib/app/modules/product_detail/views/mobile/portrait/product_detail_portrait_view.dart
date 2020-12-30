@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/global_widgets/animation/fade_animation.dart';
 import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/vertical_list_widget.dart';
@@ -77,7 +78,7 @@ class ProductDetailPortraitView extends StatelessWidget {
                       isReadOnly: true,
                       spacing: 5.0,
                       starCount: 5,
-                      rating: 5,
+                      rating: _.product.rating.toDouble(),
                       allowHalfRating: true,
                       borderColor: kGreyColor,
                     ),
@@ -133,7 +134,13 @@ class ProductDetailPortraitView extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline1,
                   ),
                 ),
-                VerticalList(itemCount: _.product.variations),
+                _.product.variations.length > 0
+                    ? VerticalList(
+                        itemCount: _.product.variations,
+                        onTapItem: (item) {
+                          _.getProductDetail(item.id);
+                        })
+                    : Container(),
                 SizedBox(height: 100.0),
               ],
             ),

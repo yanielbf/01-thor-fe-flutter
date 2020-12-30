@@ -11,44 +11,43 @@ class SliderMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(builder: (_) {
-      return SideInAnimation(1,
-          child: Container(
-            width: Get.width,
-            height: 230.0,
-            child: Swiper(
-              itemCount: _.banners.length,
-              scrollDirection: Axis.horizontal,
-              autoplay: true,
-              autoplayDelay: 5000,
-              control: new SwiperControl(),
-              pagination: SwiperPagination(
-                alignment: Alignment.bottomCenter,
-                builder: DotSwiperPaginationBuilder(
-                  activeColor: kPrimaryColor,
-                  color: kYellowColor,
-                ),
+      if (_.banners.length == 0) {
+        return Container();
+      }
+      return Container(
+          height: 200,
+          child: Swiper(
+            autoplay: true,
+            autoplayDelay: 5000,
+            pagination: SwiperPagination(
+              alignment: Alignment.bottomCenter,
+              builder: DotSwiperPaginationBuilder(
+                activeColor: kPrimaryColor,
+                color: kYellowColor,
               ),
-              itemBuilder: (context, index) {
-                var banner = _.banners[index];
-                return GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.PRODUCTDETAIL, arguments: banner.id);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 30.0, right: 18.0, left: 18.0, top: 18.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0),
-                      child: CachedNetworkImage(
-                        imageUrl: banner.image,
-                        width: Get.width,
-                        fit: BoxFit.fitWidth,
-                      ),
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              var banner = _.banners[index];
+              return GestureDetector(
+                onTap: () {
+                  _.navigateFromBanner(banner);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 30.0, right: 18.0, left: 18.0, top: 18.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: CachedNetworkImage(
+                      imageUrl: banner.image,
+                      width: Get.width,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
+            itemCount: _.banners.length,
+            control: SwiperControl(),
           ));
     });
   }

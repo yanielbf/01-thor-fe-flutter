@@ -47,6 +47,7 @@ class MainPortraitView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SliderMain(),
+                SizedBox(height: 15.0),
                 SideInAnimation(
                   2,
                   child: Subhead(

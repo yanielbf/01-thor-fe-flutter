@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:url_launcher/url_launcher.dart';
 
 class LauncherUrl {
+  void launchExternalUrl(String url) async {
+    await launch(url);
+  }
+
   void launchWhatsApp(String phone, String message) async {
     String url() {
       if (Platform.isIOS) {

@@ -81,7 +81,7 @@ class ProductCard extends StatelessWidget {
                     color: kYellowColor,
                     spacing: 1.0,
                     size: 15.0,
-                    rating: 5,
+                    rating: product.rating.toDouble(),
                     isReadOnly: true,
                     starCount: 5,
                     allowHalfRating: true,

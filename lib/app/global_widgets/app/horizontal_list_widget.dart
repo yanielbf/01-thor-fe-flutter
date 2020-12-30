@@ -5,9 +5,11 @@ import 'package:thor_flutter/app/utils/screens.dart';
 
 class HorizontalListView extends StatelessWidget {
   final List<Product> itemCount;
+  final Function onTapItem;
   HorizontalListView({
     Key key,
     @required this.itemCount,
+    this.onTapItem,
   }) : super(key: key);
 
   @override
@@ -24,12 +26,11 @@ class HorizontalListView extends StatelessWidget {
         itemBuilder: (context, index) {
           var product = itemCount[index];
           return ProductCard(
-            product: product,
-            isHorizontalList: true,
-            onTap: () {
-              //Get.to(ProductDetailPage(product: product));
-            },
-          );
+              product: product,
+              isHorizontalList: true,
+              onTap: () {
+                onTapItem(product);
+              });
         },
       ),
     );

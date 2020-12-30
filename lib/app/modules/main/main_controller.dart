@@ -5,11 +5,16 @@ import 'package:thor_flutter/app/data/model/banner.dart';
 import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/mainscreen.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
+import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
+import 'package:thor_flutter/app/modules/app/app_controller.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 
 class MainController extends GetxController {
+  final AppController _appController = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
+  LauncherUrl launcher = Get.find<LauncherUrl>();
 
   List<Category> categories = [];
   List<Product> productsNew = [];
@@ -61,6 +66,10 @@ class MainController extends GetxController {
   void navigateFromBanner(BannerM banner) {
     if (banner.linkType == 'category') {
     } else if (banner.linkType == 'product') {
-    } else {}
+      _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
+          arguments: banner.linkResource);
+    } else {
+      launcher.launchExternalUrl(banner.linkResource);
+    }
   }
 }

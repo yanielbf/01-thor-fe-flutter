@@ -6,9 +6,11 @@ import 'package:thor_flutter/app/global_widgets/app/product_card_widget.dart';
 
 class VerticalList extends StatelessWidget {
   final List<Product> itemCount;
+  final Function onTapItem;
   VerticalList({
     Key key,
     @required this.itemCount,
+    this.onTapItem,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class VerticalList extends StatelessWidget {
             product: product,
             isHorizontalList: false,
             onTap: () {
-              //Get.to(ProductDetailPage(product: product));
+              onTapItem(product);
             },
           ),
         );
