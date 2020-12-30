@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/global_widgets/animation/fade_animation.dart';
 import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/vertical_list_widget.dart';
