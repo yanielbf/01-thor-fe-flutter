@@ -60,7 +60,7 @@ class LoginController extends GetxController {
     if (formKey.currentState.validate()) {
       try {
         await _authenticationService.requestLogin(_email, _password);
-        Get.offAllNamed(AppRoutes.MAIN);
+        Get.offAllNamed(AppRoutes.NAVIGATIONBAR);
       } on DioError catch (e) {
         if (e.response != null && e.response != null) {
           if (e.response.data is String) {
