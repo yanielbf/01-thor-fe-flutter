@@ -15,4 +15,6 @@ class AppRoutes {
   static const PROFILE_OPTIONS = "profile_options";
   static const DEVELOPERS = "developers";
   static const ABOUTUS = "aboutus";
+  static const BILLS = "bills";
+  static const ORDERS = "orders";
 }
