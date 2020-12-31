@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/modules/about_us/about_us_binding.dart';
+import 'package:thor_flutter/app/modules/about_us/about_us_page.dart';
 import 'package:thor_flutter/app/modules/categories/categories_binding.dart';
 import 'package:thor_flutter/app/modules/categories/categories_page.dart';
+import 'package:thor_flutter/app/modules/developer_company/developer_company_binding.dart';
+import 'package:thor_flutter/app/modules/developer_company/developer_company_page.dart';
 import 'package:thor_flutter/app/modules/forgot_password/forgot_binding.dart';
 import 'package:thor_flutter/app/modules/forgot_password/forgot_page.dart';
 import 'package:thor_flutter/app/modules/info/info_binding.dart';
@@ -61,5 +65,13 @@ class AppPages {
         name: AppRoutes.PROFILE_OPTIONS,
         page: () => ProfileOptionsPage(),
         binding: ProfileOptionsBinding()),
+    GetPage(
+        name: AppRoutes.DEVELOPERS,
+        page: () => DeveloperCompanyPage(),
+        binding: DeveloperCompanyBinding()),
+    GetPage(
+        name: AppRoutes.ABOUTUS,
+        page: () => AboutUsPage(),
+        binding: AboutUsBinding()),
   ];
 }

@@ -13,4 +13,6 @@ class AppRoutes {
   static const PRODUCTSBYCATEGORY = "productsbycategory";
   static const CATEGORIES = "categories";
   static const PROFILE_OPTIONS = "profile_options";
+  static const DEVELOPERS = "developers";
+  static const ABOUTUS = "aboutus";
 }

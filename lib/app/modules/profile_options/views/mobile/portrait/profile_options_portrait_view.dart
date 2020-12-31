@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/modules/profile_options/profile_options_controller.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
 
@@ -135,7 +136,8 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             7,
                             child: ListTile(
                               onTap: () {
-                                //Get.to(AboutPage());
+                                _.appController
+                                    .navigateToRoute(AppRoutes.ABOUTUS);
                               },
                               leading: Icon(
                                 FlutterIcons.information_outline_mco,
@@ -155,7 +157,8 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             8,
                             child: ListTile(
                               onTap: () {
-                                //Get.to(AboutPage());
+                                _.appController
+                                    .navigateToRoute(AppRoutes.DEVELOPERS);
                               },
                               leading: Icon(
                                 FlutterIcons.wrench_outline_mco,
