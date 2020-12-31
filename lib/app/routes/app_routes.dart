@@ -18,4 +18,6 @@ class AppRoutes {
   static const BILLS = "bills";
   static const ORDERS = "orders";
   static const PDFVIEWER = "pdfviewer";
+  static const NOTIFICATIONS = "notifications";
+  static const FAVORITES = "favorites";
 }

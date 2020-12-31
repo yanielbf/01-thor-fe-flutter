@@ -7,12 +7,16 @@ import 'package:thor_flutter/app/modules/categories/categories_binding.dart';
 import 'package:thor_flutter/app/modules/categories/categories_page.dart';
 import 'package:thor_flutter/app/modules/developer_company/developer_company_binding.dart';
 import 'package:thor_flutter/app/modules/developer_company/developer_company_page.dart';
+import 'package:thor_flutter/app/modules/favorites/favorites_binding.dart';
+import 'package:thor_flutter/app/modules/favorites/favorites_page.dart';
 import 'package:thor_flutter/app/modules/forgot_password/forgot_binding.dart';
 import 'package:thor_flutter/app/modules/forgot_password/forgot_page.dart';
 import 'package:thor_flutter/app/modules/info/info_binding.dart';
 import 'package:thor_flutter/app/modules/login/login_binding.dart';
 import 'package:thor_flutter/app/modules/main/main_binding.dart';
 import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation.dart';
+import 'package:thor_flutter/app/modules/notifications/notifications_binding.dart';
+import 'package:thor_flutter/app/modules/notifications/notifications_page.dart';
 import 'package:thor_flutter/app/modules/orders/orders_binding.dart';
 import 'package:thor_flutter/app/modules/orders/orders_page.dart';
 import 'package:thor_flutter/app/modules/pdf_viewer/pdf_viewer_binding.dart';
@@ -91,5 +95,13 @@ class AppPages {
         name: AppRoutes.PDFVIEWER,
         page: () => PdfViewerPage(),
         binding: PdfViewerBinding()),
+    GetPage(
+        name: AppRoutes.NOTIFICATIONS,
+        page: () => NotificationsPage(),
+        binding: NotificationsBinding()),
+    GetPage(
+        name: AppRoutes.FAVORITES,
+        page: () => FavoritesPage(),
+        binding: FavoritesBinding()),
   ];
 }

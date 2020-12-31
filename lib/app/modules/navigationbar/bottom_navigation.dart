@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:thor_flutter/app/modules/cart/cart_page.dart';
+import 'package:thor_flutter/app/modules/favorites/favorites_page.dart';
 import 'package:thor_flutter/app/modules/main/main_page.dart';
 import 'package:thor_flutter/app/modules/profile_options/profile_options_page.dart';
 
@@ -20,8 +22,8 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
 
   var currentTab = [
     MainPage(),
-    MainPage(),
-    MainPage(),
+    CartPage(),
+    FavoritesPage(),
     ProfileOptionsPage(),
   ];
 

@@ -130,7 +130,8 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                                 Icons.arrow_forward_ios,
                               ),
                               onTap: () {
-                                //Get.to(ActivityPage());
+                                _.appController
+                                    .navigateToRoute(AppRoutes.NOTIFICATIONS);
                               },
                             ),
                           ),

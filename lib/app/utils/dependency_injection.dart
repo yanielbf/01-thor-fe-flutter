@@ -16,6 +16,8 @@ import 'package:thor_flutter/app/data/repository/menu_repo.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/data/service/authentication_service.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
+import 'package:thor_flutter/app/modules/cart/cart_controller.dart';
+import 'package:thor_flutter/app/modules/favorites/favorites_controller.dart';
 import 'package:thor_flutter/app/modules/main/main_controller.dart';
 import 'package:thor_flutter/app/modules/profile_options/profile_options_controller.dart';
 import 'constants.dart';
@@ -73,6 +75,8 @@ class DependencyInjection {
     //Controllers
     Get.put(AppController());
     Get.put(MainController());
+    Get.put(CartController());
+    Get.put(FavoritesController());
     Get.put(ProfileOptionsController());
   }
 }
