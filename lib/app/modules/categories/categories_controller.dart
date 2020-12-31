@@ -15,7 +15,7 @@ class CategoriesController extends GetxController {
     {'id': null, 'name': 'Categorías'}
   ];
   List<Product> products = [];
-  String categoryName = '';
+  String categoryName = 'Categorías';
 
   @override
   void onReady() {
@@ -36,8 +36,9 @@ class CategoriesController extends GetxController {
       } else {
         if (!noadd) {
           breadcrumb.add({'id': id, 'name': name});
+          categoryName = 'Categorías';
         }
-        categoryName = name ?? 'Categorías';
+        categoryName = name;
         categories = await _storeRepo.requestChildrenCategories(id);
         products = await _storeRepo.requestProductsByCategory(id);
       }

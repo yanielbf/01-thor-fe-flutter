@@ -11,6 +11,8 @@ import 'package:thor_flutter/app/modules/product_detail/product_detail_binding.d
 import 'package:thor_flutter/app/modules/product_detail/product_detail_page.dart';
 import 'package:thor_flutter/app/modules/products_by_category/products_by_category_binding.dart';
 import 'package:thor_flutter/app/modules/products_by_category/products_by_category_page.dart';
+import 'package:thor_flutter/app/modules/profile_options/profile_options_binding.dart';
+import 'package:thor_flutter/app/modules/profile_options/profile_options_page.dart';
 import 'package:thor_flutter/app/modules/splash/splash_binding.dart';
 import 'package:thor_flutter/app/modules/info/info_page.dart';
 import 'package:thor_flutter/app/modules/login/login_page.dart';
@@ -55,5 +57,9 @@ class AppPages {
         name: AppRoutes.CATEGORIES,
         page: () => CategoriesPage(),
         binding: CategoriesBinding()),
+    GetPage(
+        name: AppRoutes.PROFILE_OPTIONS,
+        page: () => ProfileOptionsPage(),
+        binding: ProfileOptionsBinding()),
   ];
 }

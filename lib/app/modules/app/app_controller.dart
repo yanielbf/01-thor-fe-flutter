@@ -72,9 +72,9 @@ class AppController extends GetxController {
         _activeRouteBottomBar.value = index;
         break;
       case 3:
-        _activeRoute = AppRoutes.MAIN;
+        _activeRoute = AppRoutes.PROFILE_OPTIONS;
         _activeRouteBottomBar.value = index;
-        Get.toNamed(AppRoutes.MAIN);
+        Get.toNamed(AppRoutes.PROFILE_OPTIONS);
         break;
     }
   }

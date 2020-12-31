@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:thor_flutter/app/modules/main/main_page.dart';
+import 'package:thor_flutter/app/modules/profile_options/profile_options_page.dart';
 
 class BottomNavigationBarPage extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
     MainPage(),
     MainPage(),
     MainPage(),
-    MainPage(),
+    ProfileOptionsPage(),
   ];
 
   @override
