@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/global_widgets/animation/fade_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/product_grid_card_widget.dart';
-import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/modules/product_detail/product_detail_controller.dart';
 import 'package:thor_flutter/app/modules/products_by_category/products_by_category_controller.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
@@ -13,8 +12,6 @@ import 'package:thor_flutter/app/utils/colors.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
 
 class ProductsByCategoryPortraitView extends StatelessWidget {
-  AppController _appController = Get.find<AppController>();
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProductsByCategoryController>(builder: (_) {
@@ -40,7 +37,7 @@ class ProductsByCategoryPortraitView extends StatelessWidget {
               child: ProductGridCard(
                 product: product,
                 onTap: () {
-                  _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
+                  _.appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
                       arguments: product.id);
                 },
               ),

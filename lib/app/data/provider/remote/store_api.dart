@@ -37,4 +37,19 @@ class StoreAPI {
     var response = await _dio.get('/store/product-details/$id');
     return Product.fromJson(response.data['data']);
   }
+
+  Future<List<Product>> requestFavorites() async {
+    var response = await _dio.get('/favorites/products');
+    print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+    print(response);
+    return (response.data['data'] as List)
+        .map((e) => Product.fromJson(e))
+        .toList();
+  }
+
+  Future<void> addToFavorites() async {}
+
+  Future<void> removeFromFavorites() async {}
+
+  Future<void> destroyFavorites() async {}
 }

@@ -5,8 +5,10 @@ import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/app/progress_indicator.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
+import 'package:thor_flutter/app/modules/app/app_controller.dart';
 
 class ProductsByCategoryController extends GetxController {
+  final AppController appController = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
 
   List<Product> products = [];

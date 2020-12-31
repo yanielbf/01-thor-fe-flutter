@@ -26,4 +26,8 @@ class StoreRepo {
   Future<List<Category>> requestChildrenCategories(int id) async {
     return _storeApi.requestChildrenCategories(id);
   }
+
+  Future<List<Product>> requestFavorites() async {
+    return _storeApi.requestFavorites();
+  }
 }

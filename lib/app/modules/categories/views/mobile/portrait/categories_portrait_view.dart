@@ -5,13 +5,11 @@ import 'package:thor_flutter/app/global_widgets/animation/fade_animation.dart';
 import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/category_circle_widget.dart';
 import 'package:thor_flutter/app/global_widgets/app/product_grid_card_widget.dart';
-import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/modules/categories/categories_controller.dart';
 import 'package:thor_flutter/app/modules/categories/views/mobile/portrait/local_widgets/breadcrumd_categories.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 
 class CategoriesPortraitView extends StatelessWidget {
-  AppController _appController = Get.find<AppController>();
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CategoriesController>(builder: (_) {
@@ -104,7 +102,11 @@ class CategoriesPortraitView extends StatelessWidget {
                       index,
                       child: ProductGridCard(
                         product: product,
-                        onTap: () {},
+                        onTap: () {
+                          _.appController.navigateToRoute(
+                              AppRoutes.PRODUCTDETAIL,
+                              arguments: product.id);
+                        },
                       ),
                     );
                   },
