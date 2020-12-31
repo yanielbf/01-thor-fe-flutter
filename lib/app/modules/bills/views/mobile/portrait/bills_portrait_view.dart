@@ -10,8 +10,22 @@ class BillsPortraitView extends StatelessWidget {
     return GetBuilder<BillsController>(builder: (_) {
       return Scaffold(
           appBar: AppBar(
-            title: Text("Facturas"),
+            title:
+                Text(_.type == 'ordinary-invoice' ? "Facturas" : "Rembolsos"),
             elevation: 0.0,
+            actions: [
+              PopupMenuButton<Choice>(
+                onSelected: (choice) {
+                  _.changeTypeBill(choice.value);
+                },
+                itemBuilder: (BuildContext context) {
+                  return choices.map((Choice choice) {
+                    return PopupMenuItem<Choice>(
+                        value: choice, child: Text(choice.title));
+                  }).toList();
+                },
+              ),
+            ],
           ),
           body: Container(
             child: ListView.builder(
@@ -26,4 +40,16 @@ class BillsPortraitView extends StatelessWidget {
           ));
     });
   }
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'Facturas', value: 'ordinary-invoice'),
+  const Choice(title: 'Rembolsos', value: 'refund-invoice'),
+];
+
+class Choice {
+  const Choice({this.title, this.value, this.icon});
+  final String title;
+  final String value;
+  final IconData icon;
 }
