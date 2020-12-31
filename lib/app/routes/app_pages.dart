@@ -15,6 +15,8 @@ import 'package:thor_flutter/app/modules/main/main_binding.dart';
 import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation.dart';
 import 'package:thor_flutter/app/modules/orders/orders_binding.dart';
 import 'package:thor_flutter/app/modules/orders/orders_page.dart';
+import 'package:thor_flutter/app/modules/pdf_viewer/pdf_viewer_binding.dart';
+import 'package:thor_flutter/app/modules/pdf_viewer/pdf_viewer_page.dart';
 import 'package:thor_flutter/app/modules/product_detail/product_detail_binding.dart';
 import 'package:thor_flutter/app/modules/product_detail/product_detail_page.dart';
 import 'package:thor_flutter/app/modules/products_by_category/products_by_category_binding.dart';
@@ -85,5 +87,9 @@ class AppPages {
         name: AppRoutes.ORDERS,
         page: () => OrdersPage(),
         binding: OrdersBinding()),
+    GetPage(
+        name: AppRoutes.PDFVIEWER,
+        page: () => PdfViewerPage(),
+        binding: PdfViewerBinding()),
   ];
 }

@@ -50,7 +50,8 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             3,
                             child: ListTile(
                               onTap: () {
-                                //Get.to(OrderPage());
+                                _.appController
+                                    .navigateToRoute(AppRoutes.ORDERS);
                               },
                               leading: Icon(
                                 FlutterIcons.layers_fea,
@@ -70,7 +71,8 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             4,
                             child: ListTile(
                               onTap: () {
-                                //Get.to(ProfilePaymentPage());
+                                _.appController
+                                    .navigateToRoute(AppRoutes.BILLS);
                               },
                               leading: Icon(
                                 FlutterIcons.file_text_fea,

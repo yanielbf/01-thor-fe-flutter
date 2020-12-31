@@ -17,4 +17,5 @@ class AppRoutes {
   static const ABOUTUS = "aboutus";
   static const BILLS = "bills";
   static const ORDERS = "orders";
+  static const PDFVIEWER = "pdfviewer";
 }
