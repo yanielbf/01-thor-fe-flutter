@@ -30,4 +30,9 @@ class StoreRepo {
   Future<List<Product>> requestFavorites() async {
     return _storeApi.requestFavorites();
   }
+
+  Future<void> requestAddToCart(
+      int productId, String name, double price, double tax) async {
+    return _storeApi.requestAddToCart(productId, name, price, tax);
+  }
 }

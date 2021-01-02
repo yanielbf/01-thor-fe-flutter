@@ -7,6 +7,7 @@ class Product {
       @required this.salesPrice,
       @required this.realStock,
       @required this.discountPercentage,
+      @required this.primaryTax,
       @required this.promotional,
       @required this.image,
       @required this.rating,
@@ -25,6 +26,7 @@ class Product {
   String description;
   List<Product> variations;
   List<String> images;
+  double primaryTax;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
       id: json["id"],
@@ -35,6 +37,7 @@ class Product {
       promotional: json["promotional"],
       description: json["description"] != null ? json["description"] : '',
       rating: json["rating"],
+      primaryTax: json["primary_tax"].toDouble(),
       image: json["image"],
       images: json["images"] != null
           ? (json["images"] as List).map((e) => e).toList().cast<String>()

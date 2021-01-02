@@ -148,7 +148,7 @@ class ProductDetailPortraitView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            //Get.to(CartPage());
+            _.addProductToCart();
           },
           backgroundColor: kPrimaryColor,
           label: Text(

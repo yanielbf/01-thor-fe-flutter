@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/data/model/cart.dart';
 import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/mainscreen.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
@@ -46,9 +47,24 @@ class StoreAPI {
         .toList();
   }
 
-  Future<void> addToFavorites() async {}
+  Future<void> requestAddToFavorites() async {}
 
-  Future<void> removeFromFavorites() async {}
+  Future<void> requestRemoveFromFavorites() async {}
 
-  Future<void> destroyFavorites() async {}
+  Future<void> requestDestroyFavorites() async {}
+
+  Future<void> requestAddToCart(
+      int productId, String name, double price, double tax) async {
+    CartItem item = CartItem(
+        id: productId, name: name, qty: 1, options: {'tax': tax}, price: price);
+    await _dio.post('/cart/addproducts', data: {
+      'items': [item]
+    });
+  }
+
+  Future<void> requestRemoveFromCart() async {}
+
+  Future<void> requestUpdateItemFromCart() async {}
+
+  Future<void> requestDestroyCart() async {}
 }

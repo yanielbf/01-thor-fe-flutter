@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/get.dart';
 import 'package:thor_flutter/app/modules/cart/cart_page.dart';
 import 'package:thor_flutter/app/modules/favorites/favorites_page.dart';
 import 'package:thor_flutter/app/modules/main/main_page.dart';
+import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation_controller.dart';
 import 'package:thor_flutter/app/modules/profile_options/profile_options_page.dart';
 
 class BottomNavigationBarPage extends StatefulWidget {
@@ -40,62 +43,74 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _willPopCallback(context),
-      child: Scaffold(
-        key: _scaffoldkey,
-        drawerEdgeDragWidth: 0,
-        body: Stack(
-          children: <Widget>[
-            NotificationListener<UserScrollNotification>(
-              child: TabBarView(
-                  children: currentTab,
-                  controller: _tabController,
-                  physics: NeverScrollableScrollPhysics()),
-              onNotification: (UserScrollNotification notification) {
-                if (true) {
-                  if (notification.direction == ScrollDirection.reverse &&
-                      notification.metrics.extentAfter > kToolbarHeight &&
-                      notification.metrics.axis == Axis.vertical) {
-                    _animationController.forward();
-                  } else if (notification.direction ==
-                      ScrollDirection.forward) {
-                    _animationController.reverse();
-                  }
-                }
-                return true;
-              },
+    return GetBuilder<BottomNavigationBarController>(
+      builder: (_) {
+        return WillPopScope(
+          onWillPop: () => _willPopCallback(context),
+          child: Scaffold(
+            key: _scaffoldkey,
+            drawerEdgeDragWidth: 0,
+            body: Stack(
+              children: <Widget>[
+                NotificationListener<UserScrollNotification>(
+                  child: TabBarView(
+                      children: currentTab,
+                      controller: _tabController,
+                      physics: NeverScrollableScrollPhysics()),
+                  onNotification: (UserScrollNotification notification) {
+                    if (true) {
+                      if (notification.direction == ScrollDirection.reverse &&
+                          notification.metrics.extentAfter > kToolbarHeight &&
+                          notification.metrics.axis == Axis.vertical) {
+                        _animationController.forward();
+                      } else if (notification.direction ==
+                          ScrollDirection.forward) {
+                        _animationController.reverse();
+                      }
+                    }
+                    return true;
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentTab,
-          onTap: (index) {
-            setState(() {
-              _currentTab = index;
-              _tabController.animateTo(_currentTab);
-              _animationController.reverse();
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Theme.of(context).accentColor,
-          selectedLabelStyle: TextStyle(
-              // fontSize: 15.0,
-              ),
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.home_ant), label: 'Tienda'),
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.shopping_cart_fea), label: 'Carrito'),
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.favorite_border_mdi),
-                label: 'Favoritos'),
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.account_outline_mco), label: 'Cliente'),
-          ],
-        ),
-      ),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: _currentTab,
+              onTap: (index) {
+                setState(() {
+                  _currentTab = index;
+                  _tabController.animateTo(_currentTab);
+                  _animationController.reverse();
+                });
+              },
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Theme.of(context).primaryColor,
+              unselectedItemColor: Theme.of(context).accentColor,
+              selectedLabelStyle: TextStyle(
+                  // fontSize: 15.0,
+                  ),
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(FlutterIcons.home_ant), label: 'Tienda'),
+                BottomNavigationBarItem(
+                    icon: _.appController.totalCart.value > 0
+                        ? Icon(FlutterIcons.shopping_cart_ent,
+                            color: Colors.red)
+                        : Icon(FlutterIcons.shopping_cart_fea),
+                    label: 'Carrito'),
+                BottomNavigationBarItem(
+                    icon: Icon(FlutterIcons.favorite_border_mdi),
+                    label: 'Favoritos'),
+                BottomNavigationBarItem(
+                    icon: _.appController.totalNotifications.value > 0
+                        ? Icon(FlutterIcons.account_alert_mco,
+                            color: Colors.red)
+                        : Icon(FlutterIcons.account_outline_mco),
+                    label: 'Cliente'),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

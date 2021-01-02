@@ -107,7 +107,9 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                                   width: 5.0,
                                 ),
                                 Obx(() {
-                                  return _.totalNotifications.value > 0
+                                  return _.appController.totalNotifications
+                                              .value >
+                                          0
                                       ? Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 9, vertical: 3),
@@ -116,7 +118,8 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                                                   BorderRadius.circular(50),
                                               color: Colors.red),
                                           child: Text(
-                                              _.totalNotifications.value
+                                              _.appController.totalNotifications
+                                                  .value
                                                   .toString(),
                                               style: Theme.of(context)
                                                   .textTheme

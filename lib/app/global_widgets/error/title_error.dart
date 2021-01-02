@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class TitleError extends StatelessWidget {
+class TitleAlert extends StatelessWidget {
   final String title;
-  TitleError({@required this.title});
+  TitleAlert({@required this.title});
 
   @override
   Widget build(BuildContext context) {

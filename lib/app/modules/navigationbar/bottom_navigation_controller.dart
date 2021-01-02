@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:thor_flutter/app/data/model/product.dart';
+import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/modules/cart/cart_controller.dart';
 import 'package:thor_flutter/app/modules/favorites/favorites_controller.dart';
 import 'package:thor_flutter/app/modules/main/main_controller.dart';
 import 'package:thor_flutter/app/modules/profile_options/profile_options_controller.dart';
 
 class BottomNavigationBarController extends GetxController {
-  Product product;
+  AppController appController = Get.find<AppController>();
 
   @override
   void onInit() {

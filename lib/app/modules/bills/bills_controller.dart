@@ -39,14 +39,14 @@ class BillsController extends GetxController {
       Get.back();
       if (e.response != null && e.response != null) {
         Get.dialog(AlertDialog(
-            title: TitleError(title: 'Ha ocurrido un error'),
+            title: TitleAlert(title: 'Ha ocurrido un error'),
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
       print(e);
       Get.back();
       Get.dialog(AlertDialog(
-          title: TitleError(title: 'Ha ocurrido un error'),
+          title: TitleAlert(title: 'Ha ocurrido un error'),
           content: Text(e.toString())));
     }
   }

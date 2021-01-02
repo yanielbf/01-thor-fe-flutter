@@ -1,28 +1,24 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:thor_flutter/app/data/model/customer.dart';
-import 'package:thor_flutter/app/data/model/order.dart';
-import 'package:thor_flutter/app/data/model/order_item.dart';
+import 'package:thor_flutter/app/data/model/setting.dart';
 import 'package:thor_flutter/app/data/provider/local/authentication_local.dart';
+import 'package:thor_flutter/app/data/repository/common_repo.dart';
+import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 class AppController extends GetxController {
   final AuthenticationLocal _authenticationLocal =
       Get.find<AuthenticationLocal>();
+  final CommonRepo _commonRepo = Get.find<CommonRepo>();
 
-  RxInt _activeRouteBottomBar = 0.obs;
-  RxInt get activeRouteBottomBar => _activeRouteBottomBar;
-
-  String _activeRoute = AppRoutes.MAIN;
-  String get activeRoute => _activeRoute;
-
+  RxInt activeRouteBottomBar = 0.obs;
+  String activeRoute = AppRoutes.MAIN;
   Customer customer;
-
-  RxInt _totalNotifications = 1.obs;
-  RxInt get totalNotifications => _totalNotifications;
-
-  Order _order;
-
-  Order get order => _order;
+  Setting settings;
+  RxInt totalNotifications = 0.obs;
+  RxInt totalCart = 0.obs;
 
   @override
   void onInit() async {
@@ -32,47 +28,50 @@ class AppController extends GetxController {
 
   Future<void> _bootstrap() async {
     await _getSession();
-    _createOrderEmpty();
+    await _getSettings();
   }
 
   Future<void> _getSession() async {
     customer = await _authenticationLocal.getSession();
   }
 
-  void _createOrderEmpty() {
-    _order = Order(
-        dateDelivery: DateTime.now(), status: 'Pendiente', orderItems: []);
-  }
-
-  void addOrderItem(OrderItem order) {
-    _order.orderItems.add(order);
-  }
-
-  void clearOrderItems() {
-    _order.orderItems.clear();
-    update(['main-actions']);
+  Future<void> _getSettings() async {
+    try {
+      settings = await _commonRepo.requestSettings();
+    } on DioError catch (e) {
+      if (e.response != null && e.response != null) {
+        Get.dialog(AlertDialog(
+            title: TitleAlert(title: 'Ha ocurrido un error'),
+            content: Text(e.response.data['message'])));
+      }
+    } catch (e) {
+      print(e);
+      Get.dialog(AlertDialog(
+          title: TitleAlert(title: 'Ha ocurrido un error'),
+          content: Text(e.toString())));
+    }
   }
 
   void navigateFromBottomBar(int index) {
     switch (index) {
       case 0:
-        _activeRoute = AppRoutes.MAIN;
-        _activeRouteBottomBar.value = index;
+        activeRoute = AppRoutes.MAIN;
+        activeRouteBottomBar.value = index;
         Get.toNamed(AppRoutes.MAIN);
         break;
       case 1:
-        _activeRoute = AppRoutes.MAIN;
-        _activeRouteBottomBar.value = index;
+        activeRoute = AppRoutes.MAIN;
+        activeRouteBottomBar.value = index;
         Get.toNamed(AppRoutes.MAIN);
         break;
       case 2:
         Get.toNamed(AppRoutes.MAIN);
-        _activeRoute = AppRoutes.MAIN;
-        _activeRouteBottomBar.value = index;
+        activeRoute = AppRoutes.MAIN;
+        activeRouteBottomBar.value = index;
         break;
       case 3:
-        _activeRoute = AppRoutes.PROFILE_OPTIONS;
-        _activeRouteBottomBar.value = index;
+        activeRoute = AppRoutes.PROFILE_OPTIONS;
+        activeRouteBottomBar.value = index;
         Get.toNamed(AppRoutes.PROFILE_OPTIONS);
         break;
     }
@@ -80,7 +79,7 @@ class AppController extends GetxController {
 
   void navigateToRoute(String route,
       {bool removeStack = false, dynamic arguments}) {
-    _activeRoute = route;
+    activeRoute = route;
     if (removeStack) {
       Get.offAllNamed(route);
     } else {

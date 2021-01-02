@@ -9,8 +9,6 @@ class ProfileOptionsController extends GetxController {
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
   final AppController appController = Get.find<AppController>();
 
-  final RxInt totalNotifications = 5.obs;
-
   @override
   void onReady() {
     super.onReady();
@@ -26,7 +24,7 @@ class ProfileOptionsController extends GetxController {
 
   Future<void> closeSession() async {
     Get.dialog(AlertDialog(
-      title: TitleError(title: '¿Desea cerrar la sesión?'),
+      title: TitleAlert(title: '¿Desea cerrar la sesión?'),
       content: Text('Esperamos que regrese pronto con nosotros'),
       actions: [
         FlatButton(

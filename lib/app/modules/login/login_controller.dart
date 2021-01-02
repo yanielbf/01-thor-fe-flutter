@@ -68,18 +68,18 @@ class LoginController extends GetxController {
         if (e.response != null && e.response != null) {
           if (e.response.data is String) {
             Get.dialog(AlertDialog(
-                title: TitleError(title: 'Ha ocurrido un error'),
+                title: TitleAlert(title: 'Ha ocurrido un error'),
                 content: Text(e.response.data)));
           } else {
             Get.dialog(AlertDialog(
-                title: TitleError(title: 'Ha ocurrido un error'),
+                title: TitleAlert(title: 'Ha ocurrido un error'),
                 content: Text(e.response.data['message'])));
           }
         }
       } catch (e) {
         print(e);
         Get.dialog(AlertDialog(
-            title: TitleError(title: 'Ha ocurrido un error'),
+            title: TitleAlert(title: 'Ha ocurrido un error'),
             content: Text(e.toString())));
       }
     } else {

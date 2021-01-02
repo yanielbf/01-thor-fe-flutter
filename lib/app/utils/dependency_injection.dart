@@ -7,12 +7,12 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:thor_flutter/app/data/provider/local/authentication_local.dart';
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
 import 'package:thor_flutter/app/data/provider/remote/authentication_api.dart';
+import 'package:thor_flutter/app/data/provider/remote/common_api.dart';
 import 'package:thor_flutter/app/data/provider/remote/document_api.dart';
-import 'package:thor_flutter/app/data/provider/remote/menu_api.dart';
 import 'package:thor_flutter/app/data/provider/remote/store_api.dart';
 import 'package:thor_flutter/app/data/repository/authentication_repo.dart';
+import 'package:thor_flutter/app/data/repository/common_repo.dart';
 import 'package:thor_flutter/app/data/repository/document_repo.dart';
-import 'package:thor_flutter/app/data/repository/menu_repo.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/data/service/authentication_service.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
@@ -54,13 +54,13 @@ class DependencyInjection {
 
     // Providers
     Get.lazyPut<AuthenticationAPI>(() => AuthenticationAPI(), fenix: true);
-    Get.lazyPut<MenuAPI>(() => MenuAPI(), fenix: true);
+    Get.lazyPut<CommonAPI>(() => CommonAPI(), fenix: true);
     Get.lazyPut<StoreAPI>(() => StoreAPI(), fenix: true);
     Get.lazyPut<DocumentAPI>(() => DocumentAPI(), fenix: true);
 
     //Repositories
     Get.lazyPut<AuthenticationRepo>(() => AuthenticationRepo(), fenix: true);
-    Get.lazyPut<MenuRepo>(() => MenuRepo(), fenix: true);
+    Get.lazyPut<CommonRepo>(() => CommonRepo(), fenix: true);
     Get.lazyPut<StoreRepo>(() => StoreRepo(), fenix: true);
     Get.lazyPut<DocumentRepo>(() => DocumentRepo(), fenix: true);
 

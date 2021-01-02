@@ -54,7 +54,7 @@ class ForgotController extends GetxController {
             await _authenticationRepo.requestForgotPassword(_email.text);
         Get.back();
         Get.dialog(AlertDialog(
-          title: TitleError(title: 'Todo ha ido bien'),
+          title: TitleAlert(title: 'Todo ha ido bien'),
           content: Text(response.message),
           actions: [ButtonDialog(title: 'Cerrar', callback: closeAndGoToLogin)],
         ));
@@ -63,14 +63,14 @@ class ForgotController extends GetxController {
         print(e);
         if (e.response != null && e.response != null) {
           Get.dialog(AlertDialog(
-              title: TitleError(title: 'Ha ocurrido un error'),
+              title: TitleAlert(title: 'Ha ocurrido un error'),
               content: ContentError(data: e.response.data)));
         }
       } catch (e) {
         Get.back();
         print(e);
         Get.dialog(AlertDialog(
-            title: TitleError(title: 'Ha ocurrido un error'),
+            title: TitleAlert(title: 'Ha ocurrido un error'),
             content: Text(e.toString())));
       }
     }
