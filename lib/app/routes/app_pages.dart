@@ -15,6 +15,7 @@ import 'package:thor_flutter/app/modules/info/info_binding.dart';
 import 'package:thor_flutter/app/modules/login/login_binding.dart';
 import 'package:thor_flutter/app/modules/main/main_binding.dart';
 import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation.dart';
+import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation_binding.dart';
 import 'package:thor_flutter/app/modules/notifications/notifications_binding.dart';
 import 'package:thor_flutter/app/modules/notifications/notifications_page.dart';
 import 'package:thor_flutter/app/modules/orders/orders_binding.dart';
@@ -56,6 +57,7 @@ class AppPages {
     GetPage(
         name: AppRoutes.NAVIGATIONBAR,
         page: () => BottomNavigationBarPage(),
+        binding: BottomNavigationBarBinding(),
         transition: Transition.cupertinoDialog),
     GetPage(
         name: AppRoutes.MAIN, page: () => MainPage(), binding: MainBinding()),

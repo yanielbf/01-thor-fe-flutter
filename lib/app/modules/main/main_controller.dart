@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/banner.dart';
 import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/mainscreen.dart';
-import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rules/rules.dart';
+import 'package:thor_flutter/app/data/model/customer.dart';
 import 'package:thor_flutter/app/data/service/authentication_service.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
@@ -59,7 +60,9 @@ class LoginController extends GetxController {
     print(formKey.currentState.validate());
     if (formKey.currentState.validate()) {
       try {
-        await _authenticationService.requestLogin(_email, _password);
+        Customer customer =
+            await _authenticationService.requestLogin(_email, _password);
+        appController.customer = customer;
         Get.offAllNamed(AppRoutes.NAVIGATIONBAR);
       } on DioError catch (e) {
         if (e.response != null && e.response != null) {

@@ -18,6 +18,7 @@ class ProfileOptionsController extends GetxController {
   }
 
   void _bootstrap() async {
+    print(appController.customer);
     await getCountNotifications();
   }
 

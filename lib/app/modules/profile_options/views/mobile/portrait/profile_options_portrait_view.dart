@@ -11,7 +11,9 @@ class ProfileOptionsPortraitView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileOptionsController>(builder: (_) {
-      print(_);
+      if (_ == null) {
+        return Container();
+      }
       return Scaffold(
         body: SafeArea(
           child: Container(

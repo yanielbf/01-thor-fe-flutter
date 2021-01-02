@@ -15,8 +15,7 @@ class AppController extends GetxController {
   String _activeRoute = AppRoutes.MAIN;
   String get activeRoute => _activeRoute;
 
-  Customer _customer;
-  Customer get customer => _customer;
+  Customer customer;
 
   RxInt _totalNotifications = 1.obs;
   RxInt get totalNotifications => _totalNotifications;
@@ -37,7 +36,7 @@ class AppController extends GetxController {
   }
 
   Future<void> _getSession() async {
-    _customer = await _authenticationLocal.getSession();
+    customer = await _authenticationLocal.getSession();
   }
 
   void _createOrderEmpty() {
@@ -91,6 +90,6 @@ class AppController extends GetxController {
 
   void closeSession() {
     _authenticationLocal.removeSession();
-    Get.offNamed(AppRoutes.LOGIN);
+    Get.offAllNamed(AppRoutes.LOGIN);
   }
 }
