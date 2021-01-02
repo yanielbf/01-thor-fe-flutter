@@ -7,6 +7,7 @@ import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/app/progress_indicator.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
+import 'package:thor_flutter/app/utils/colors.dart';
 
 class CartController extends GetxController {
   final AppController appController = Get.find<AppController>();
@@ -82,7 +83,26 @@ class CartController extends GetxController {
     }
   }
 
-  Future<void> removeCart(String rowId, int qty, double price) async {
+  Future<void> removeCart(String rowId, int qty, double price) {
+    Get.dialog(AlertDialog(
+      title: TitleAlert(title: '¿Desea eliminar el producto?'),
+      content: Text('Necesitará agregar el producto nuevamente al carrito'),
+      actions: [
+        FlatButton(
+          child: Text(
+            "Aceptar",
+            style: TextStyle(color: kPrimaryColor),
+          ),
+          onPressed: () async {
+            Get.back();
+            await _removeCart(rowId, qty, price);
+          },
+        )
+      ],
+    ));
+  }
+
+  Future<void> _removeCart(String rowId, int qty, double price) async {
     ProggresIndicatorCC.processRequest();
     try {
       await _storeRepo.requestRemoveFromCart(rowId);
@@ -110,10 +130,34 @@ class CartController extends GetxController {
   }
 
   Future<void> destroyCart() async {
+    Get.dialog(AlertDialog(
+      title: TitleAlert(title: '¿Desea vaciar el carrito?'),
+      content: Text('Necesitará agregar los productos nuevamente al carrito'),
+      actions: [
+        FlatButton(
+          child: Text(
+            "Aceptar",
+            style: TextStyle(color: kPrimaryColor),
+          ),
+          onPressed: () async {
+            Get.back();
+            await _destroyCart();
+          },
+        )
+      ],
+    ));
+  }
+
+  Future<void> _destroyCart() async {
     ProggresIndicatorCC.processRequest();
     try {
       await _storeRepo.requestDestroyCart();
       appController.totalCart.value = 0;
+      cart.items = [];
+      cart.subtotalPrice = "0.00 ${checkoutCurrency.name}";
+      cart.totalPrice = "0.00 ${checkoutCurrency.name}";
+      cart.total = 0;
+      appController.totalCart.value = cart.total;
       update();
       Get.back();
     } on DioError catch (e) {

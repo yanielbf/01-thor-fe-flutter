@@ -165,6 +165,16 @@ class CartPortraitView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20.0),
+                  FadeInAnimation(
+                    5,
+                    child: RaisedButtonWidget(
+                      title: 'Vaciar carrito',
+                      onPressed: () {
+                        _.destroyCart();
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
                 ],
               ),
             ),
