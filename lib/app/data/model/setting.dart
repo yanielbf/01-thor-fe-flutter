@@ -2,18 +2,18 @@ import 'package:meta/meta.dart';
 
 class Setting {
   Setting({
-    @required this.currency,
+    @required this.currencies,
   });
 
-  List<Currency> currency;
+  List<Currency> currencies;
 
   factory Setting.fromJson(Map<String, dynamic> json) => Setting(
-        currency: List<Currency>.from(
+        currencies: List<Currency>.from(
             json["currency"].map((x) => Currency.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "currency": List<dynamic>.from(currency.map((x) => x.toJson())),
+        "currencies": List<dynamic>.from(currencies.map((x) => x.toJson())),
       };
 }
 

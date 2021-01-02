@@ -36,7 +36,7 @@ class MainController extends GetxController {
   Future<void> _getMainScreen() async {
     //ProggresIndicatorCC.processRequest();
     try {
-      MainScreen data = await _storeRepo.requestDailyMenu();
+      MainScreen data = await _storeRepo.requestMainScreenProducts();
       categories = data.categories;
       productsNew = data.news;
       productsMoreSale = data.moreSales;

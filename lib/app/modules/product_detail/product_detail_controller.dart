@@ -8,7 +8,7 @@ import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 
 class ProductDetailController extends GetxController {
-  AppController appController = Get.find<AppController>();
+  final AppController appController = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
 
   Product product;

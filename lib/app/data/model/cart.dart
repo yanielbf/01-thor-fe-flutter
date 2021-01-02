@@ -39,29 +39,35 @@ class CartItem {
       @required this.id,
       @required this.name,
       this.price,
+      this.pricePromotional,
       @required this.qty,
+      this.image,
       this.options});
 
   String rowId;
   int id;
   String name;
   double price;
+  double pricePromotional;
   int qty;
+  String image;
   Map<String, dynamic> options;
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
-        rowId: json["rowId"],
-        id: json["id"],
-        name: json["name"],
-        price: json["price"],
-        qty: json["qty"],
-      );
+      rowId: json["row_id"],
+      id: json["id"],
+      name: json["name"],
+      price: json["price"].toDouble(),
+      qty: json["qty"],
+      image: json["image"],
+      pricePromotional: json["price_promotional"].toDouble());
 
   Map<String, dynamic> toJson() => {
-        "rowId": rowId,
+        "row_id": rowId,
         "id": id,
         "name": name,
         "price": price,
         "qty": qty,
+        "price_promotional": pricePromotional,
       };
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/modules/cart/cart_controller.dart';
 import 'package:thor_flutter/app/modules/cart/cart_page.dart';
+import 'package:thor_flutter/app/modules/favorites/favorites_controller.dart';
 import 'package:thor_flutter/app/modules/favorites/favorites_page.dart';
 import 'package:thor_flutter/app/modules/main/main_page.dart';
 import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation_controller.dart';
@@ -18,6 +19,9 @@ class BottomNavigationBarPage extends StatefulWidget {
 class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
     with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  final CartController cartController = Get.find<CartController>();
+  final FavoritesController favoriteController =
+      Get.find<FavoritesController>();
   TabController _tabController;
   AnimationController _animationController;
   DateTime currentBackPressTime;
@@ -80,6 +84,11 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
                   _currentTab = index;
                   _tabController.animateTo(_currentTab);
                   _animationController.reverse();
+                  if (index == 1) {
+                    cartController.getCart();
+                  } else if (index == 2) {
+                    favoriteController.getProducts();
+                  }
                 });
               },
               type: BottomNavigationBarType.fixed,
@@ -92,19 +101,23 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
                 BottomNavigationBarItem(
                     icon: Icon(FlutterIcons.home_ant), label: 'Tienda'),
                 BottomNavigationBarItem(
-                    icon: _.appController.totalCart.value > 0
-                        ? Icon(FlutterIcons.shopping_cart_ent,
-                            color: Colors.red)
-                        : Icon(FlutterIcons.shopping_cart_fea),
+                    icon: Obx(() {
+                      return _.appController.totalCart.value > 0
+                          ? Icon(FlutterIcons.shopping_cart_ent,
+                              color: Colors.red)
+                          : Icon(FlutterIcons.shopping_cart_fea);
+                    }),
                     label: 'Carrito'),
                 BottomNavigationBarItem(
                     icon: Icon(FlutterIcons.favorite_border_mdi),
                     label: 'Favoritos'),
                 BottomNavigationBarItem(
-                    icon: _.appController.totalNotifications.value > 0
-                        ? Icon(FlutterIcons.account_alert_mco,
-                            color: Colors.red)
-                        : Icon(FlutterIcons.account_outline_mco),
+                    icon: Obx(() {
+                      return _.appController.totalNotifications.value > 0
+                          ? Icon(FlutterIcons.account_alert_mco,
+                              color: Colors.red)
+                          : Icon(FlutterIcons.account_outline_mco);
+                    }),
                     label: 'Cliente'),
               ],
             ),

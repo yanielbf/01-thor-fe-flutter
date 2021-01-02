@@ -53,6 +53,11 @@ class StoreAPI {
 
   Future<void> requestDestroyFavorites() async {}
 
+  Future<Cart> requestCart(int currencyId) async {
+    var response = await _dio.get('/cart/cart/$currencyId');
+    return Cart.fromJson(response.data['data']);
+  }
+
   Future<void> requestAddToCart(
       int productId, String name, double price, double tax) async {
     CartItem item = CartItem(
@@ -62,9 +67,15 @@ class StoreAPI {
     });
   }
 
-  Future<void> requestRemoveFromCart() async {}
+  Future<void> requestRemoveFromCart(String rowId) async {
+    await _dio.get('/cart/removeproduct/$rowId');
+  }
 
-  Future<void> requestUpdateItemFromCart() async {}
+  Future<void> requestUpdateItemFromCart(String id, int qty) async {
+    await _dio.put('/cart/updateproduct', data: {'id': id, 'qty': qty});
+  }
 
-  Future<void> requestDestroyCart() async {}
+  Future<void> requestDestroyCart() async {
+    await _dio.get('/cart/destroy');
+  }
 }
