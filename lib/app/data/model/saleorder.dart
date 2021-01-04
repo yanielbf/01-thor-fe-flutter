@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 class SaleOrder {
@@ -19,15 +20,18 @@ class SaleOrder {
   String status;
   int totalItems;
 
-  factory SaleOrder.fromJson(Map<String, dynamic> json) => SaleOrder(
-        id: json["id"],
-        date: json["date"],
-        title: json["title"],
-        pdf: json["pdf"],
-        totalAmount: json["totalAmount"],
-        totalItems: json["totalItems"],
-        status: json["documentState"],
-      );
+  factory SaleOrder.fromJson(Map<String, dynamic> json) {
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    return SaleOrder(
+      id: json["id"],
+      date: dateFormat.format(dateFormat.parse(json["date"])),
+      title: json["title"],
+      pdf: json["pdf"],
+      totalAmount: json["totalAmount"],
+      totalItems: json["totalItems"],
+      status: json["documentState"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,

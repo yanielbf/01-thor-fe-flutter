@@ -17,7 +17,7 @@ class CartPortraitView extends StatelessWidget {
             title: Text("Carrito de compras"),
             elevation: 0.0,
           ),
-          body: _.cart != null
+          body: _.cart != null && _.cart.items.length > 0
               ? Container(
                   child: SingleChildScrollView(
                     padding: EdgeInsets.symmetric(horizontal: 18.0),
