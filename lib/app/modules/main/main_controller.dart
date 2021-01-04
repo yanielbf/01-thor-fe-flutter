@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/banner.dart';
 import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/mainscreen.dart';
+import 'package:thor_flutter/app/data/provider/firebase/firebase_notification_handler.dart';
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
@@ -13,7 +16,8 @@ import 'package:thor_flutter/app/routes/app_routes.dart';
 class MainController extends GetxController {
   final AppController _appController = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
-  LauncherUrl launcher = Get.find<LauncherUrl>();
+  final LauncherUrl launcher = Get.find<LauncherUrl>();
+  final FirebaseNotifications firebaseNotifications = FirebaseNotifications();
 
   List<Category> categories = [];
   Map<String, dynamic> productsNew;
@@ -30,8 +34,22 @@ class MainController extends GetxController {
   }
 
   void _bootstrap() async {
+    firebaseNotifications.setupFirebase(Get.context, onListenerNotifications);
     await _getMainScreen();
   }
+
+  void onListenerNotifications(data) {
+    Map<dynamic, dynamic> dataParse = json.decode(data);
+    switch (dataParse['action']) {
+      case 'refresh-mainscreen':
+        print('aaaa');
+        _getMainScreen();
+        break;
+      default:
+    }
+  }
+
+  void executeActionInController(String action) {}
 
   Future<void> _getMainScreen() async {
     //ProggresIndicatorCC.processRequest();

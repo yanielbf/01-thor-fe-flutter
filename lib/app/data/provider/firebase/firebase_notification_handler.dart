@@ -10,14 +10,14 @@ class FirebaseNotifications {
   FirebaseMessaging _messaging;
   BuildContext myContext;
 
-  void setupFirebase(BuildContext context) {
+  void setupFirebase(BuildContext context, Function callback) {
     _messaging = FirebaseMessaging();
     NotificationHandler.initNotification(context);
-    firebaseCloudMessagingListener(context);
+    firebaseCloudMessagingListener(context, callback);
     myContext = context;
   }
 
-  void firebaseCloudMessagingListener(BuildContext context) {
+  void firebaseCloudMessagingListener(BuildContext context, Function callback) {
     _messaging.requestNotificationPermissions(
         IosNotificationSettings(sound: true, badge: true, alert: true));
     _messaging.onIosSettingsRegistered.listen((event) {
@@ -33,6 +33,7 @@ class FirebaseNotifications {
               Platform.isIOS ? null : fcmBackgroundMessageHandler,
           onMessage: (Map<String, dynamic> message) async {
             if (Platform.isAndroid) {
+              callback(message['data']['body']);
               showNotification(
                   message['data']['title'], message['data']['body']);
             } else if (Platform.isIOS) {

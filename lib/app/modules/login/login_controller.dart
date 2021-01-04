@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,8 +34,15 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    firebaseNotifications.setupFirebase(Get.context);
+    firebaseNotifications.setupFirebase(Get.context, onListenerNotifications);
   }
+
+  void onListenerNotifications(data) {
+    Map<dynamic, dynamic> dataParse = json.decode(data);
+    executeActionInController(dataParse['action']);
+  }
+
+  void executeActionInController(String action) {}
 
   set autoValidate(bool value) {
     _autoValidate = value;
