@@ -88,7 +88,7 @@ class CartCard extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "\$${cartItem.pricePromotional > 0 ? cartItem.pricePromotional : cartItem.price}",
+                                "${cartItem.pricePromotional > 0 ? _.convertToCurrentCurrency(cartItem.pricePromotional) : _.convertToCurrentCurrency(cartItem.price)}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline1

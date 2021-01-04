@@ -17,6 +17,7 @@ class AppController extends GetxController {
   String activeRoute = AppRoutes.MAIN;
   Customer customer;
   Setting settings;
+  List<Currency> currencies;
   Currency mainCurrency;
   RxInt totalNotifications = 0.obs;
   RxInt totalCart = 0.obs;
@@ -39,6 +40,7 @@ class AppController extends GetxController {
   Future<void> _getSettings() async {
     try {
       settings = await _commonRepo.requestSettings();
+      currencies = settings.currencies;
       mainCurrency = settings.currencies.firstWhere((e) => e.isMain == 1);
     } on DioError catch (e) {
       if (e.response != null && e.response != null) {

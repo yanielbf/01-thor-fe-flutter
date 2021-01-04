@@ -78,4 +78,8 @@ class StoreAPI {
   Future<void> requestDestroyCart() async {
     await _dio.get('/cart/destroy');
   }
+
+  Future<void> requestCheckout(int currencyId) async {
+    await _dio.get('/saledeliverynotes/checkout/$currencyId');
+  }
 }

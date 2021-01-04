@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:thor_flutter/app/data/model/category.dart';
 
@@ -22,13 +23,13 @@ class CategoryCircle extends StatelessWidget {
             Container(
               width: 60.0,
               height: 60.0,
+              child: CachedNetworkImage(
+                imageUrl: category.icon,
+              ),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                     color: Theme.of(context).accentColor.withOpacity(.2)),
-                image: DecorationImage(
-                  image: AssetImage(category.icon),
-                ),
               ),
             ),
             SizedBox(height: 12.0),

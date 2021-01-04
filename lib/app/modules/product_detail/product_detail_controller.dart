@@ -60,7 +60,7 @@ class ProductDetailController extends GetxController {
       update();
       Get.back();
       Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'En hora buena'),
+          title: TitleAlert(title: 'Enhorabuena'),
           content: Text('Producto agregado al carrito')));
     } on DioError catch (e) {
       Get.back();

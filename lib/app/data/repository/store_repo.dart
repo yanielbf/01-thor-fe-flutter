@@ -52,4 +52,8 @@ class StoreRepo {
   Future<void> requestDestroyCart() async {
     return _storeApi.requestDestroyCart();
   }
+
+  Future<void> requestCheckout(int currencyId) async {
+    return _storeApi.requestCheckout(currencyId);
+  }
 }
