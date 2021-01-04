@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "41332800620",
+    "project_id": "thor-8d898",
+    "storage_bucket": "thor-8d898.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41332800620:android:eaebbd7d10cc4e220aec49",
+        "android_client_info": {
+          "package_name": "app.otiumtek.thor_flutter.thor_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41332800620-4a789l35tjrakj2n3dpgcofkkomujvf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9oNWFWWKPq7iyXLnspUePpMkhPvcFDFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41332800620-4a789l35tjrakj2n3dpgcofkkomujvf4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

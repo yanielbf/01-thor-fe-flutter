@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rules/rules.dart';
 import 'package:thor_flutter/app/data/model/customer.dart';
+import 'package:thor_flutter/app/data/provider/firebase/firebase_notification_handler.dart';
 import 'package:thor_flutter/app/data/service/authentication_service.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
@@ -15,6 +16,8 @@ class LoginController extends GetxController {
   final AppController appController = Get.find<AppController>();
   final formKey = GlobalKey<FormState>();
 
+  FirebaseNotifications firebaseNotifications = FirebaseNotifications();
+
   String _email;
   String _password;
 
@@ -25,6 +28,12 @@ class LoginController extends GetxController {
   String get password => _password;
   bool get autoValidate => _autoValidate;
   bool get isLoading => _isLoading;
+
+  @override
+  void onReady() {
+    super.onReady();
+    firebaseNotifications.setupFirebase(Get.context);
+  }
 
   set autoValidate(bool value) {
     _autoValidate = value;
