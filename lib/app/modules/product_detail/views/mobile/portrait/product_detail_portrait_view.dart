@@ -73,33 +73,53 @@ class ProductDetailPortraitView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SideInAnimation(
-                            3,
-                            child: Row(
-                              children: [
-                                Text(
-                                  "\$ ${_.product.salesPrice}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline1
-                                      .copyWith(
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                ),
-                                SizedBox(width: Constants.SPACING_S),
-                                SmoothStarRating(
-                                  color: kYellowColor,
-                                  size: 15.0,
-                                  isReadOnly: true,
-                                  spacing: 5.0,
-                                  starCount: 5,
-                                  rating: _.product.rating.toDouble(),
-                                  allowHalfRating: true,
-                                  borderColor: kGreyColor,
-                                )
-                              ],
-                            ),
-                          ),
+                          SideInAnimation(3,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "\$${_.product.salesPrice}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4
+                                        .copyWith(
+                                            color: _.product
+                                                        .discountPercentage ==
+                                                    0
+                                                ? Theme.of(context).primaryColor
+                                                : Colors.grey,
+                                            decoration:
+                                                _.product.discountPercentage > 0
+                                                    ? TextDecoration.lineThrough
+                                                    : null),
+                                    textAlign: TextAlign.left,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  _.product.discountPercentage > 0
+                                      ? Text(
+                                          "\$${(_.product.salesPrice - (_.product.salesPrice * (_.product.discountPercentage / 100))).toStringAsFixed(2)}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4
+                                              .copyWith(color: kPrimaryColor),
+                                          textAlign: TextAlign.left,
+                                          maxLines: 2,
+                                        )
+                                      : Container(),
+                                  SizedBox(width: 10.0),
+                                  SmoothStarRating(
+                                    color: kYellowColor,
+                                    size: 15.0,
+                                    isReadOnly: true,
+                                    spacing: 5.0,
+                                    starCount: 5,
+                                    rating: _.product.rating.toDouble(),
+                                    allowHalfRating: true,
+                                    borderColor: kGreyColor,
+                                  )
+                                ],
+                              )),
                           SizedBox(height: Constants.SPACING_XS),
                           SideInAnimation(
                             4,

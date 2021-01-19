@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
@@ -54,23 +53,25 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         "\$${product.salesPrice}",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4
-                            .copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.headline4.copyWith(
+                            color: product.discountPercentage == 0
+                                ? Theme.of(context).primaryColor
+                                : Colors.grey,
+                            decoration: product.discountPercentage > 0
+                                ? TextDecoration.lineThrough
+                                : null),
                         textAlign: TextAlign.left,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(width: 5.0),
-                      product.promotional == 1
+                      SizedBox(width: 10.0),
+                      product.discountPercentage > 0
                           ? Text(
-                              "\$${product.salesPrice * (product.discountPercentage / 100)}",
+                              "\$${(product.salesPrice - (product.salesPrice * (product.discountPercentage / 100))).toStringAsFixed(2)}",
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle2
-                                  .copyWith(
-                                      decoration: TextDecoration.lineThrough),
+                                  .headline4
+                                  .copyWith(color: kPrimaryColor),
                               textAlign: TextAlign.left,
                               maxLines: 2,
                             )
@@ -91,9 +92,9 @@ class ProductCard extends StatelessWidget {
                   SizedBox(height: 5.0),
                 ],
               ),
-              product.discountPercentage == 0
+              product.discountPercentage > 0
                   ? Positioned(
-                      top: product.realStock == 0 ? 35.0 : 8.0,
+                      top: product.realStock > 0 ? 35.0 : 8.0,
                       left: 0.0,
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -105,7 +106,7 @@ class ProductCard extends StatelessWidget {
                         height: 20.0,
                         child: Center(
                           child: Text(
-                            "-${(product.discountPercentage / 100).round()}%",
+                            "-${product.discountPercentage}%",
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -134,7 +135,7 @@ class ProductCard extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             vertical: 3.0, horizontal: 10.0),
-                        color: Colors.white,
+                        color: Colors.red,
                         child: Center(
                             child: Text('Agotado',
                                 style: TextStyle(
