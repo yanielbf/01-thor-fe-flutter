@@ -1,6 +1,8 @@
 class Constants {
   //static const API_URL = 'https://01-thorecommerce-be-laravel.test/api';
-  static const API_URL = 'https://thor.otiumtek.com/api';
+  //static const API_URL = 'https://thor.otiumtek.com/api';
+  static const API_URL = 'https://dbd33fe886c2.ngrok.io/api';
+  static const APP_NAME = 'Thor your Provider';
   static const IMAGE_LOGO = 'assets/images/logo.png';
   static const IMAGE_LOGO_SIMPLE = 'assets/images/logo_simple.png';
   static const IMAGE_LOGO_SIZE = 0.45;

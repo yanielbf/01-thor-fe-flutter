@@ -42,7 +42,7 @@ class InfoPortraitView extends StatelessWidget {
                             .bodyText2
                             .merge(TextStyle(fontWeight: FontWeight.bold))),
                     SizedBox(height: Constants.SPACING_S),
-                    Text('Thor Provider',
+                    Text(Constants.APP_NAME,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2

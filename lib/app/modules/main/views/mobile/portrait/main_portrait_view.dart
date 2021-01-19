@@ -14,6 +14,7 @@ import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widget
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/slider.dart';
 import 'package:thor_flutter/app/modules/main/views/mobile/portrait/local_widgets/special_offers.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
+import 'package:thor_flutter/app/utils/constants.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
 
 class MainPortraitView extends StatelessWidget {
@@ -27,8 +28,8 @@ class MainPortraitView extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Image.asset('assets/images/logo_simple.png'),
           ),
-          title: Text('Thor provider',
-              style: Theme.of(context).textTheme.headline1),
+          title: Text(Constants.APP_NAME,
+              style: Theme.of(context).textTheme.bodyText2),
           actions: <Widget>[
             IconButton(
               icon: Icon(

@@ -102,7 +102,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
                     icon: Icon(FlutterIcons.home_ant), label: 'Tienda'),
                 BottomNavigationBarItem(
                     icon: Obx(() {
-                      return _.appController.totalCart.value > 0
+                      return _.appCtl.totalCart.value > 0
                           ? Icon(FlutterIcons.shopping_cart_ent,
                               color: Colors.red)
                           : Icon(FlutterIcons.shopping_cart_fea);
@@ -113,7 +113,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
                     label: 'Favoritos'),
                 BottomNavigationBarItem(
                     icon: Obx(() {
-                      return _.appController.totalNotifications.value > 0
+                      return _.appCtl.totalNotifications.value > 0
                           ? Icon(FlutterIcons.account_alert_mco,
                               color: Colors.red)
                           : Icon(FlutterIcons.account_outline_mco);

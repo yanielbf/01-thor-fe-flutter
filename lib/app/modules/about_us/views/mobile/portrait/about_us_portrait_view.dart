@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/modules/about_us/about_us_controller.dart';
+import 'package:thor_flutter/app/utils/constants.dart';
 
 class AboutUsPortraitView extends StatelessWidget {
   @override
@@ -40,7 +41,7 @@ class AboutUsPortraitView extends StatelessWidget {
                           .bodyText2
                           .merge(TextStyle(fontWeight: FontWeight.bold))),
                   SizedBox(height: 25.0),
-                  Text('Thor Provider',
+                  Text(Constants.APP_NAME,
                       style: Theme.of(context).textTheme.headline1),
                 ],
               ),
