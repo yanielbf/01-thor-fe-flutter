@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
@@ -90,10 +91,10 @@ class ProductCard extends StatelessWidget {
                   SizedBox(height: 5.0),
                 ],
               ),
-              product.promotional == 1
+              product.discountPercentage == 0
                   ? Positioned(
-                      top: 8.0,
-                      left: 8.0,
+                      top: product.realStock == 0 ? 35.0 : 8.0,
+                      left: 0.0,
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 2.0),
@@ -104,7 +105,7 @@ class ProductCard extends StatelessWidget {
                         height: 20.0,
                         child: Center(
                           child: Text(
-                            "-${product.discountPercentage / 100}%",
+                            "-${(product.discountPercentage / 100).round()}%",
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -127,6 +128,20 @@ class ProductCard extends StatelessWidget {
                   onPressed: () {},
                 ),
               ),
+              product.realStock > 0
+                  ? Positioned(
+                      top: 8.0,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 3.0, horizontal: 10.0),
+                        color: Colors.white,
+                        child: Center(
+                            child: Text('Agotado',
+                                style: TextStyle(
+                                    fontSize: 10.0, color: Colors.white))),
+                      ),
+                    )
+                  : Container()
             ],
           ),
         ),
