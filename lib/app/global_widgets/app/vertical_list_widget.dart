@@ -20,6 +20,7 @@ class VerticalList extends StatelessWidget {
       itemCount: itemCount.length,
       crossAxisCount: 4,
       staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
+      padding: EdgeInsets.symmetric(horizontal: 18.0),
       mainAxisSpacing: 15.0,
       crossAxisSpacing: 15.0,
       scrollDirection: Axis.vertical,

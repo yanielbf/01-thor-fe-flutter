@@ -138,6 +138,7 @@ class MainPortraitView extends StatelessWidget {
                       staggeredTileBuilder: (int index) =>
                           new StaggeredTile.count(2, index.isEven ? 2 : 4),
                     ),
+                    SizedBox(height: Constants.SPACING_M),
                     SideInAnimation(
                       6,
                       child: Subhead(
