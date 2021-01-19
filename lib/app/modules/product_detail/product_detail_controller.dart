@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
-import 'package:thor_flutter/app/global_widgets/app/progress_indicator.dart';
-import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
+import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 
 class ProductDetailController extends GetxController {
-  final AppController appController = Get.find<AppController>();
+  final AppController appCtl = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
 
   Product product;
+  RxBool isLoading = false.obs;
 
   @override
   void onReady() {
@@ -26,45 +26,54 @@ class ProductDetailController extends GetxController {
     } else {
       id = Get.arguments;
     }
-    await getProductDetail(id);
+    await fetchProductDetail(id);
   }
 
-  Future<void> getProductDetail(int id) async {
+  Future<void> fetchProductDetail(int id) async {
     try {
+      isLoading.value = true;
       product = await _storeRepo.requestProductDetail(id);
+      isLoading.value = false;
       update();
     } on DioError catch (e) {
+      isLoading.value = false;
+      if (e.response.statusCode == 401) {
+        appCtl.closeSession();
+        return;
+      }
       if (e.response != null && e.response != null) {
-        Get.dialog(AlertDialog(
-            title: TitleAlert(title: 'Ha ocurrido un error'),
+        Get.dialog(AlertDialogCC('Ha ocurrido un error',
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
-      Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'Ha ocurrido un error'),
-          content: Text(e.toString())));
+      isLoading.value = false;
+      Get.dialog(
+          AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
     }
   }
 
-  Future<void> addProductToCart() async {
+  Future<void> executeProductToCart() async {
     try {
       await _storeRepo.requestAddToCart(product.id, product.name,
           product.salesPrice.toDouble(), product.primaryTax);
-      appController.totalCart.value++;
+      appCtl.totalCart.value++;
       update();
-      Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'Enhorabuena'),
+      Get.dialog(AlertDialogCC('Enhorabuena',
           content: Text('Producto agregado al carrito')));
     } on DioError catch (e) {
+      isLoading.value = false;
+      if (e.response.statusCode == 401) {
+        appCtl.closeSession();
+        return;
+      }
       if (e.response != null && e.response != null) {
-        Get.dialog(AlertDialog(
-            title: TitleAlert(title: 'Ha ocurrido un error'),
+        Get.dialog(AlertDialogCC('Ha ocurrido un error',
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
-      Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'Ha ocurrido un error'),
-          content: Text(e.toString())));
+      isLoading.value = false;
+      Get.dialog(
+          AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
     }
   }
 }

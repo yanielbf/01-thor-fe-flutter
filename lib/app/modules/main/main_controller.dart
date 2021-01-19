@@ -9,6 +9,7 @@ import 'package:thor_flutter/app/data/model/mainscreen.dart';
 import 'package:thor_flutter/app/data/provider/firebase/firebase_notification_handler.dart';
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
+import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
@@ -70,16 +71,18 @@ class MainController extends GetxController {
       update();
     } on DioError catch (e) {
       isLoading.value = false;
+      if (e.response.statusCode == 401) {
+        appCtl.closeSession();
+        return;
+      }
       if (e.response != null && e.response != null) {
-        Get.dialog(AlertDialog(
-            title: TitleAlert(title: 'Ha ocurrido un error'),
+        Get.dialog(AlertDialogCC('Ha ocurrido un error',
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
       isLoading.value = false;
-      Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'Ha ocurrido un error'),
-          content: Text(e.toString())));
+      Get.dialog(
+          AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
     }
   }
 

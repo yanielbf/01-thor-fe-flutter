@@ -7,6 +7,7 @@ import 'package:thor_flutter/app/global_widgets/app/product_card_widget.dart';
 class VerticalList extends StatelessWidget {
   final List<Product> itemCount;
   final Function onTapItem;
+
   VerticalList({
     Key key,
     @required this.itemCount,
@@ -24,7 +25,6 @@ class VerticalList extends StatelessWidget {
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       physics: ScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 18.0),
       itemBuilder: (context, index) {
         var product = itemCount[index];
         return FadeInAnimation(
