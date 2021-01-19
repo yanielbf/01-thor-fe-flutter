@@ -21,7 +21,7 @@ void main() async {
   HttpOverrides.global = new HttpOverridesCustom();
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.init();
-  await GetStorage.init();
+  await GetStorage.init('THOR_STORAGE');
   runApp(App());
 }
 

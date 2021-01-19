@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:thor_flutter/app/modules/cart/cart_controller.dart';
 
 class Counter extends StatelessWidget {
-  String rowId;
-  int qty;
-  double price;
+  final String rowId;
+  final int qty;
+  final double price;
 
   Counter(this.rowId, this.price, this.qty);
 
@@ -22,7 +22,7 @@ class Counter extends StatelessWidget {
             SizedBox(width: 3.0),
             GestureDetector(
               onTap: () {
-                _.updateCart(rowId, qty, price, 'dec');
+                _.executeUpdateCart(rowId, qty, price, 'dec');
               },
               child: Icon(
                 Icons.remove,
@@ -42,7 +42,7 @@ class Counter extends StatelessWidget {
             SizedBox(width: 3.0),
             GestureDetector(
               onTap: () {
-                _.updateCart(rowId, qty, price, 'inc');
+                _.executeUpdateCart(rowId, qty, price, 'inc');
               },
               child: Icon(
                 Icons.add,

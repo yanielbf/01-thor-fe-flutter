@@ -85,7 +85,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage>
                   _tabController.animateTo(_currentTab);
                   _animationController.reverse();
                   if (index == 1) {
-                    cartController.getCart();
+                    cartController.fetchCart();
                   } else if (index == 2) {
                     favoriteController.getProducts();
                   }

@@ -5,7 +5,7 @@ import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
 
 class ProfileOptionsController extends GetxController {
-  final AppController appController = Get.find<AppController>();
+  final AppController appCtl = Get.find<AppController>();
 
   @override
   void onReady() {
@@ -14,7 +14,6 @@ class ProfileOptionsController extends GetxController {
   }
 
   void _bootstrap() async {
-    print(appController.customer);
     await getCountNotifications();
   }
 
@@ -31,7 +30,7 @@ class ProfileOptionsController extends GetxController {
             style: TextStyle(color: kPrimaryColor),
           ),
           onPressed: () {
-            appController.closeSession();
+            appCtl.closeSession();
           },
         )
       ],

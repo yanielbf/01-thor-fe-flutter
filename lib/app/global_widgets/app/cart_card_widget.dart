@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/cart.dart';
+import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:thor_flutter/app/global_widgets/app/counter_widget.dart';
 import 'package:thor_flutter/app/modules/cart/cart_controller.dart';
 
 class CartCard extends StatelessWidget {
-  CartItem cartItem;
+  final CartItem cartItem;
 
   CartCard(this.cartItem);
 
@@ -49,7 +50,7 @@ class CartCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 cartItem.name,
-                                style: Theme.of(context).textTheme.headline5,
+                                style: Theme.of(context).textTheme.bodyText2,
                                 textAlign: TextAlign.start,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
@@ -72,8 +73,8 @@ class CartCard extends StatelessWidget {
                                         cartItem.pricePromotional > 0
                                             ? cartItem.pricePromotional
                                             : cartItem.price;
-                                    _.removeCart(cartItem.rowId, cartItem.qty,
-                                        cartItem.qty * subPrice);
+                                    showDeleteConfirmation(_, cartItem.rowId,
+                                        cartItem.qty, cartItem.qty * subPrice);
                                   },
                                   child: Icon(
                                     FlutterIcons.delete_outline_mco,
@@ -111,6 +112,21 @@ class CartCard extends StatelessWidget {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  showDeleteConfirmation(CartController _, String id, int qty, double price) {
+    return showDialog(
+      context: Get.context,
+      builder: (context) {
+        return AlertDialogCC(
+          '¿Desea eliminar el producto del carrito?',
+          yesAction: () {
+            _.executeRemoveCart(id, qty, price);
+          },
+          noAction: () {},
         );
       },
     );

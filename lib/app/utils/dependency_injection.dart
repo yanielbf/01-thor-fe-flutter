@@ -22,7 +22,7 @@ class DependencyInjection {
   static void init() {
     Get.lazyPut<LauncherUrl>(() => LauncherUrl(), fenix: true);
 
-    Get.lazyPut<GetStorage>(() => GetStorage(), fenix: true);
+    Get.lazyPut<GetStorage>(() => GetStorage('THOR_STORAGE'), fenix: true);
 
     Get.lazyPut<AuthenticationLocal>(() => AuthenticationLocal(), fenix: true);
 

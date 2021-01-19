@@ -54,9 +54,11 @@ class ProductDetailController extends GetxController {
 
   Future<void> executeProductToCart() async {
     try {
+      isLoading.value = true;
       await _storeRepo.requestAddToCart(product.id, product.name,
           product.salesPrice.toDouble(), product.primaryTax);
       appCtl.totalCart.value++;
+      isLoading.value = false;
       update();
       Get.dialog(AlertDialogCC('Enhorabuena',
           content: Text('Producto agregado al carrito')));

@@ -41,8 +41,9 @@ class StoreRepo {
     return _storeApi.requestAddToCart(productId, name, price, tax);
   }
 
-  Future<void> requestUpdateItemFromCart(String rowId, int qty) async {
-    return _storeApi.requestUpdateItemFromCart(rowId, qty);
+  Future<Cart> requestUpdateItemFromCart(
+      String rowId, int qty, int currencyId) async {
+    return _storeApi.requestUpdateItemFromCart(rowId, qty, currencyId);
   }
 
   Future<void> requestRemoveFromCart(String rowId) async {
@@ -53,7 +54,7 @@ class StoreRepo {
     return _storeApi.requestDestroyCart();
   }
 
-  Future<void> requestCheckout(int currencyId) async {
-    return _storeApi.requestCheckout(currencyId);
+  Future<void> requestCheckout(int currencyId, String comments) async {
+    return _storeApi.requestCheckout(currencyId, comments);
   }
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:thor_flutter/app/global_widgets/animation/fade_animation.dart';
@@ -32,7 +33,19 @@ class ProductDetailPortraitView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SideInAnimation(1, child: swiperImage(context)),
+                          SideInAnimation(1,
+                              child: PinchZoomImage(
+                                image: CachedNetworkImage(
+                                    imageUrl: _.product.images[0]),
+                                zoomedBackgroundColor:
+                                    Color.fromRGBO(240, 240, 240, 1.0),
+                                onZoomStart: () {
+                                  print('Zoom started');
+                                },
+                                onZoomEnd: () {
+                                  print('Zoom finished');
+                                },
+                              )),
                           SizedBox(height: Constants.SPACING_XS),
                           SideInAnimation(
                             2,
@@ -61,7 +74,7 @@ class ProductDetailPortraitView extends StatelessWidget {
                             ),
                           ),
                           SideInAnimation(
-                            4,
+                            3,
                             child: Row(
                               children: [
                                 Text(
@@ -89,7 +102,7 @@ class ProductDetailPortraitView extends StatelessWidget {
                           ),
                           SizedBox(height: Constants.SPACING_XS),
                           SideInAnimation(
-                            5,
+                            4,
                             child: Text(
                               'Description',
                               style: Theme.of(context)
@@ -99,7 +112,7 @@ class ProductDetailPortraitView extends StatelessWidget {
                             ),
                           ),
                           FadeInAnimation(
-                            6,
+                            5,
                             child: ReadMoreText(
                               _.product.description,
                               trimLines: 4,
@@ -140,7 +153,7 @@ class ProductDetailPortraitView extends StatelessWidget {
                 )),
           ],
         ),
-        floatingActionButton: _.product != null
+        floatingActionButton: _.product != null && !_.isLoading.value
             ? FloatingActionButton.extended(
                 onPressed: () {
                   _.executeProductToCart();

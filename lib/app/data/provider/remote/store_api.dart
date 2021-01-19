@@ -41,7 +41,6 @@ class StoreAPI {
 
   Future<List<Product>> requestFavorites() async {
     var response = await _dio.get('/favorites/products');
-    print(response);
     return (response.data['data'] as List)
         .map((e) => Product.fromJson(e))
         .toList();
@@ -71,15 +70,19 @@ class StoreAPI {
     await _dio.get('/cart/removeproduct/$rowId');
   }
 
-  Future<void> requestUpdateItemFromCart(String id, int qty) async {
-    await _dio.put('/cart/updateproduct', data: {'id': id, 'qty': qty});
+  Future<Cart> requestUpdateItemFromCart(
+      String id, int qty, int currencyId) async {
+    var response = await _dio.put('/cart/updateproduct',
+        data: {'id': id, 'qty': qty, 'currencyId': currencyId});
+    return Cart.fromJson(response.data['data']);
   }
 
   Future<void> requestDestroyCart() async {
     await _dio.get('/cart/destroy');
   }
 
-  Future<void> requestCheckout(int currencyId) async {
-    await _dio.get('/saledeliverynotes/checkout/$currencyId');
+  Future<void> requestCheckout(int currencyId, String comment) async {
+    await _dio.post('/saledeliverynotes/checkout/$currencyId',
+        data: {'comment': comment});
   }
 }

@@ -29,10 +29,12 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                           context,
                           image:
                               'assets/images/2ab08d7aa25abbd579f036c3c3acec47.png',
-                          username:
-                              _ != null ? _.appController.customer.name : '',
-                          email:
-                              _ != null ? _.appController.customer.email : '',
+                          username: _.appCtl.customer != null
+                              ? _.appCtl.customer.name
+                              : '',
+                          email: _.appCtl.customer != null
+                              ? _.appCtl.customer.email
+                              : '',
                         ),
                         primaryCard(context),
                       ],
@@ -52,8 +54,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             3,
                             child: ListTile(
                               onTap: () {
-                                _.appController
-                                    .navigateToRoute(AppRoutes.ORDERS);
+                                _.appCtl.navigateToRoute(AppRoutes.ORDERS);
                               },
                               leading: Icon(
                                 FlutterIcons.layers_fea,
@@ -73,8 +74,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             4,
                             child: ListTile(
                               onTap: () {
-                                _.appController
-                                    .navigateToRoute(AppRoutes.BILLS);
+                                _.appCtl.navigateToRoute(AppRoutes.BILLS);
                               },
                               leading: Icon(
                                 FlutterIcons.file_text_fea,
@@ -107,9 +107,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                                   width: 5.0,
                                 ),
                                 Obx(() {
-                                  return _.appController.totalNotifications
-                                              .value >
-                                          0
+                                  return _.appCtl.totalNotifications.value > 0
                                       ? Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 9, vertical: 3),
@@ -118,8 +116,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                                                   BorderRadius.circular(50),
                                               color: Colors.red),
                                           child: Text(
-                                              _.appController.totalNotifications
-                                                  .value
+                                              _.appCtl.totalNotifications.value
                                                   .toString(),
                                               style: Theme.of(context)
                                                   .textTheme
@@ -135,7 +132,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                                 Icons.arrow_forward_ios,
                               ),
                               onTap: () {
-                                _.appController
+                                _.appCtl
                                     .navigateToRoute(AppRoutes.NOTIFICATIONS);
                               },
                             ),
@@ -144,8 +141,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             7,
                             child: ListTile(
                               onTap: () {
-                                _.appController
-                                    .navigateToRoute(AppRoutes.ABOUTUS);
+                                _.appCtl.navigateToRoute(AppRoutes.ABOUTUS);
                               },
                               leading: Icon(
                                 FlutterIcons.information_outline_mco,
@@ -165,8 +161,7 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             8,
                             child: ListTile(
                               onTap: () {
-                                _.appController
-                                    .navigateToRoute(AppRoutes.DEVELOPERS);
+                                _.appCtl.navigateToRoute(AppRoutes.DEVELOPERS);
                               },
                               leading: Icon(
                                 FlutterIcons.wrench_outline_mco,

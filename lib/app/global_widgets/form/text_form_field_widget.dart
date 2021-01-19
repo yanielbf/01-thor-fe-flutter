@@ -6,17 +6,19 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool obscureText;
   final Widget prefixIcon;
   final String value;
+  final int maxLines;
   final Function(String) validator;
   final void Function(String) onChanged;
   final TextEditingController controller;
 
   TextFormFieldWidget({
     @required this.hintText,
-    @required this.keyboardType,
+    this.keyboardType,
     @required this.obscureText,
     this.prefixIcon,
     this.value,
-    @required this.validator,
+    this.validator,
+    this.maxLines = 1,
     this.controller,
     this.onChanged,
   });
@@ -24,6 +26,8 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      //textInputAction: TextInputAction.done,
+      maxLines: maxLines,
       cursorColor: Theme.of(context).primaryColor,
       obscureText: obscureText,
       keyboardType: keyboardType,
