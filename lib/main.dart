@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:thor_flutter/app/modules/splash/splash_binding.dart';
 import 'package:thor_flutter/app/modules/splash/splash_page.dart';
 import 'package:thor_flutter/app/routes/app_pages.dart';
@@ -16,10 +17,11 @@ class HttpOverridesCustom extends HttpOverrides {
   }
 }
 
-void main() {
+void main() async {
   HttpOverrides.global = new HttpOverridesCustom();
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.init();
+  await GetStorage.init();
   runApp(App());
 }
 

@@ -24,10 +24,13 @@ class CategoryCircle extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              width: 80.0,
-              height: 80.0,
-              child: CachedNetworkImage(
-                imageUrl: category.icon,
+              padding: EdgeInsets.all(10.0),
+              width: 70.0,
+              height: 70.0,
+              child: Center(
+                child: CachedNetworkImage(
+                  imageUrl: category.icon,
+                ),
               ),
               decoration: BoxDecoration(
                 color: kPrimaryColor,

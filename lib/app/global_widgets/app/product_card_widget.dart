@@ -43,7 +43,7 @@ class ProductCard extends StatelessWidget {
                   SizedBox(height: 8.0),
                   Text(
                     product.name,
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.bodyText2,
                     textAlign: TextAlign.left,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

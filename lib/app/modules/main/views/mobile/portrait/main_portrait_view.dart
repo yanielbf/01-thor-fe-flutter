@@ -67,7 +67,6 @@ class MainPortraitView extends StatelessWidget {
                     ),
                     SizedBox(height: Constants.SPACING_S),
                     CategoryMain(),
-                    SizedBox(height: Constants.SPACING_L),
                     SideInAnimation(
                       3,
                       child: Subhead(
@@ -97,7 +96,7 @@ class MainPortraitView extends StatelessWidget {
                         height: 250.0,
                       ),
                     ),
-                    SizedBox(height: Constants.SPACING_S),
+                    SizedBox(height: Constants.SPACING_L),
                     SideInAnimation(
                       5,
                       child: Subhead(

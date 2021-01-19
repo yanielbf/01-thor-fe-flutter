@@ -1,20 +1,18 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'package:thor_flutter/app/data/model/customer.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthenticationLocal {
+  final GetStorage _storage = Get.find<GetStorage>();
   static const SESSION = 'session';
 
-  final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
-
   Future<void> setSession(Customer customer) async {
-    await _storage.write(key: SESSION, value: jsonEncode(customer.toJson()));
+    await _storage.write(SESSION, jsonEncode(customer.toJson()));
   }
 
   Future<Customer> getSession() async {
-    final String data = await _storage.read(key: SESSION);
+    final String data = await _storage.read(SESSION);
     if (data != null) {
       final Customer customer = Customer.fromJson(jsonDecode(data));
 
@@ -28,7 +26,7 @@ class AuthenticationLocal {
   }
 
   Future<String> getToken() async {
-    final String data = await _storage.read(key: SESSION);
+    final String data = await _storage.read(SESSION);
     if (data != null) {
       final Customer customer = Customer.fromJson(jsonDecode(data));
       if (DateTime.now().isBefore(customer.expirationAt)) {
@@ -40,6 +38,6 @@ class AuthenticationLocal {
   }
 
   Future<void> removeSession() async {
-    await _storage.delete(key: SESSION);
+    await _storage.remove(SESSION);
   }
 }

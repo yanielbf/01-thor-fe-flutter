@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:thor_flutter/app/data/provider/local/authentication_local.dart';
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
@@ -22,8 +22,7 @@ class DependencyInjection {
   static void init() {
     Get.lazyPut<LauncherUrl>(() => LauncherUrl(), fenix: true);
 
-    Get.lazyPut<FlutterSecureStorage>(() => FlutterSecureStorage(),
-        fenix: true);
+    Get.lazyPut<GetStorage>(() => GetStorage(), fenix: true);
 
     Get.lazyPut<AuthenticationLocal>(() => AuthenticationLocal(), fenix: true);
 
