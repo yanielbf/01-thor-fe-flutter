@@ -30,13 +30,10 @@ class BillsController extends GetxController {
   }
 
   Future<void> getBills() async {
-    ProggresIndicatorCC.processRequest();
     try {
       bills = await _documentRepo.requestBills(type);
       update();
-      Get.back();
     } on DioError catch (e) {
-      Get.back();
       if (e.response != null && e.response != null) {
         Get.dialog(AlertDialog(
             title: TitleAlert(title: 'Ha ocurrido un error'),
@@ -44,7 +41,6 @@ class BillsController extends GetxController {
       }
     } catch (e) {
       print(e);
-      Get.back();
       Get.dialog(AlertDialog(
           title: TitleAlert(title: 'Ha ocurrido un error'),
           content: Text(e.toString())));

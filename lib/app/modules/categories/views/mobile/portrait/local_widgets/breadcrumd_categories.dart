@@ -18,7 +18,7 @@ class BreadCrumbCategories extends StatelessWidget {
                     child: Text(item['name']),
                     onTap: () {
                       if (index + 1 < _.breadcrumb.length) {
-                        _.navigateFromBreadcrumb(
+                        _.executeNavigateFromBreadcrumb(
                             index, item['id'], item['name']);
                       }
                     }));

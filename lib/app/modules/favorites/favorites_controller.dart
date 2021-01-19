@@ -24,21 +24,16 @@ class FavoritesController extends GetxController {
   }
 
   Future<void> getProducts() async {
-    ProggresIndicatorCC.processRequest();
     try {
       products = await _storeRepo.requestFavorites();
       update();
-      Get.back();
     } on DioError catch (e) {
-      Get.back();
       if (e.response != null && e.response != null) {
         Get.dialog(AlertDialog(
             title: TitleAlert(title: 'Ha ocurrido un error'),
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
-      print(e);
-      Get.back();
       Get.dialog(AlertDialog(
           title: TitleAlert(title: 'Ha ocurrido un error'),
           content: Text(e.toString())));

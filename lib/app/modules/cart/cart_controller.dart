@@ -31,7 +31,6 @@ class CartController extends GetxController {
   }
 
   Future<void> getCart() async {
-    ProggresIndicatorCC.processRequest();
     try {
       cart = await _storeRepo.requestCart(checkoutCurrency.id);
       appController.totalCart.value = cart.total;

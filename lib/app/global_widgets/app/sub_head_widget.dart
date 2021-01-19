@@ -16,13 +16,16 @@ class Subhead extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText2
+                .copyWith(fontWeight: FontWeight.bold),
           ),
           GestureDetector(
             onTap: onTap,
             child: Text(
               'Ver todos',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
           ),
         ],

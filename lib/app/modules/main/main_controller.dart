@@ -14,7 +14,7 @@ import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
 
 class MainController extends GetxController {
-  final AppController _appController = Get.find<AppController>();
+  final AppController appCtl = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
   final LauncherUrl launcher = Get.find<LauncherUrl>();
   final FirebaseNotifications firebaseNotifications = FirebaseNotifications();
@@ -27,6 +27,8 @@ class MainController extends GetxController {
   List<String> productsImage = [];
   List<BannerM> banners = [];
 
+  RxBool isLoading = false.obs;
+
   @override
   void onReady() {
     super.onReady();
@@ -35,14 +37,14 @@ class MainController extends GetxController {
 
   void _bootstrap() async {
     firebaseNotifications.setupFirebase(Get.context, onListenerNotifications);
-    await _getMainScreen();
+    await fetchMainScreen();
   }
 
   void onListenerNotifications(data) {
     Map<dynamic, dynamic> dataParse = json.decode(data);
     switch (dataParse['action']) {
       case 'refresh-mainscreen':
-        _getMainScreen();
+        fetchMainScreen();
         break;
       default:
     }
@@ -50,9 +52,9 @@ class MainController extends GetxController {
 
   void executeActionInController(String action) {}
 
-  Future<void> _getMainScreen() async {
-    //ProggresIndicatorCC.processRequest();
+  Future<void> fetchMainScreen() async {
     try {
+      isLoading.value = true;
       MainScreen data = await _storeRepo.requestMainScreenProducts();
       categories = data.categories;
       productsNew = data.news;
@@ -64,18 +66,17 @@ class MainController extends GetxController {
           .toList()
           .cast<String>();
       banners = data.banners;
+      isLoading.value = false;
       update();
-      //Get.back();
     } on DioError catch (e) {
-      //Get.back();
+      isLoading.value = false;
       if (e.response != null && e.response != null) {
         Get.dialog(AlertDialog(
             title: TitleAlert(title: 'Ha ocurrido un error'),
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
-      print(e);
-      //Get.back();
+      isLoading.value = false;
       Get.dialog(AlertDialog(
           title: TitleAlert(title: 'Ha ocurrido un error'),
           content: Text(e.toString())));
@@ -84,10 +85,10 @@ class MainController extends GetxController {
 
   void navigateFromBanner(BannerM banner) {
     if (banner.linkType == 'category') {
-      _appController.navigateToRoute(AppRoutes.PRODUCTSBYCATEGORY,
+      appCtl.navigateToRoute(AppRoutes.PRODUCTSBYCATEGORY,
           arguments: {'id': banner.linkResource, 'name': banner.title});
     } else if (banner.linkType == 'product') {
-      _appController.navigateToRoute(AppRoutes.PRODUCTDETAIL,
+      appCtl.navigateToRoute(AppRoutes.PRODUCTDETAIL,
           arguments: banner.linkResource);
     } else {
       launcher.launchExternalUrl(banner.linkResource);

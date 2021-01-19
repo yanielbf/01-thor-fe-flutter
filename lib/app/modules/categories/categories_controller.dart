@@ -4,20 +4,20 @@ import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/category.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
-import 'package:thor_flutter/app/global_widgets/app/progress_indicator.dart';
-import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
+import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 
 class CategoriesController extends GetxController {
-  AppController appController = Get.find<AppController>();
+  AppController appCtl = Get.find<AppController>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
 
-  List<Category> categories = [];
   List<Map<String, dynamic>> breadcrumb = [
     {'id': null, 'name': 'Categorías'}
   ];
+  List<Category> categories = [];
   List<Product> products = [];
   String categoryName = 'Categorías';
+  RxBool isLoading = false.obs;
 
   @override
   void onReady() {
@@ -26,48 +26,51 @@ class CategoriesController extends GetxController {
   }
 
   void _bootstrap() async {
-    await getCategories();
+    await fetchCategories();
   }
 
-  Future<void> getCategories(
-      {int id = null, String name = null, bool noadd = false}) async {
-    ProggresIndicatorCC.processRequest();
+  Future<void> fetchCategories(
+      {int id, String name, bool noadd = false}) async {
     try {
+      isLoading.value = true;
       if (id == null) {
         categories = await _storeRepo.requestRootCategories();
+        categoryName = "Categorías";
+        products = [];
       } else {
         if (!noadd) {
           breadcrumb.add({'id': id, 'name': name});
-          categoryName = 'Categorías';
         }
         categoryName = name;
         categories = await _storeRepo.requestChildrenCategories(id);
         products = await _storeRepo.requestProductsByCategory(id);
       }
+      isLoading.value = false;
       update();
-      Get.back();
     } on DioError catch (e) {
-      Get.back();
+      isLoading.value = false;
+      if (e.response.statusCode == 401) {
+        appCtl.closeSession();
+        return;
+      }
       if (e.response != null && e.response != null) {
-        Get.dialog(AlertDialog(
-            title: TitleAlert(title: 'Ha ocurrido un error'),
+        Get.dialog(AlertDialogCC('Ha ocurrido un error',
             content: Text(e.response.data['message'])));
       }
     } catch (e) {
-      print(e);
-      Get.back();
-      Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'Ha ocurrido un error'),
-          content: Text(e.toString())));
+      isLoading.value = false;
+      Get.dialog(
+          AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
     }
   }
 
-  void navigateFromBreadcrumb(int index, int id, String name) {
+  void executeNavigateFromBreadcrumb(int index, int id, String name) {
     if (index == 0) {
       breadcrumb = breadcrumb.sublist(0, 1);
     } else {
       breadcrumb = breadcrumb.sublist(0, index + 1);
     }
-    getCategories(id: id, name: index == 0 ? '' : name, noadd: true);
+    fetchCategories(
+        id: id, name: index == 0 ? 'Categorías' : name, noadd: true);
   }
 }

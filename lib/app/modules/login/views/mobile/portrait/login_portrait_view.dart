@@ -55,15 +55,10 @@ class LoginPortraitView extends StatelessWidget {
                         children: <Widget>[
                           SideInAnimation(
                             1,
-                            child: Center(
-                              child: Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      Constants.IMAGE_LOGO_SIMPLE,
-                                      width: MediaQuery.of(context).size.width *
-                                          Constants.IMAGE_LOGO_SIZE),
-                                ),
-                              ),
+                            child: Container(
+                              child: Image.asset(Constants.IMAGE_LOGO,
+                                  width: MediaQuery.of(context).size.width *
+                                      Constants.IMAGE_LOGO_SIZE),
                             ),
                           ),
                           SizedBox(height: Constants.SPACING_S),
