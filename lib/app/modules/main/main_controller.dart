@@ -42,7 +42,6 @@ class MainController extends GetxController {
     Map<dynamic, dynamic> dataParse = json.decode(data);
     switch (dataParse['action']) {
       case 'refresh-mainscreen':
-        print('aaaa');
         _getMainScreen();
         break;
       default:

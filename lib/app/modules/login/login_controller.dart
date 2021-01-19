@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rules/rules.dart';
 import 'package:thor_flutter/app/data/model/customer.dart';
-import 'package:thor_flutter/app/data/provider/firebase/firebase_notification_handler.dart';
 import 'package:thor_flutter/app/data/service/authentication_service.dart';
-import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
+import 'package:thor_flutter/app/global_widgets/alert/alert_content_api_error_widget.dart';
+import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
 import 'package:thor_flutter/app/utils/validation.dart';
@@ -15,49 +13,14 @@ import 'package:thor_flutter/app/utils/validation.dart';
 class LoginController extends GetxController {
   final AuthenticationService _authenticationService =
       Get.find<AuthenticationService>();
-  final AppController appController = Get.find<AppController>();
+  final AppController appCtl = Get.find<AppController>();
   final formKey = GlobalKey<FormState>();
 
-  FirebaseNotifications firebaseNotifications = FirebaseNotifications();
+  var email = TextEditingController();
+  var password = TextEditingController();
 
-  String _email;
-  String _password;
-
-  bool _autoValidate = false;
-  bool _isLoading = false;
-
-  String get email => _email;
-  String get password => _password;
-  bool get autoValidate => _autoValidate;
-  bool get isLoading => _isLoading;
-
-  @override
-  void onReady() {
-    super.onReady();
-    firebaseNotifications.setupFirebase(Get.context, onListenerNotifications);
-  }
-
-  void onListenerNotifications(data) {
-    Map<dynamic, dynamic> dataParse = json.decode(data);
-    executeActionInController(dataParse['action']);
-  }
-
-  void executeActionInController(String action) {}
-
-  set autoValidate(bool value) {
-    _autoValidate = value;
-    update(['textfield-email', 'textfield-password']);
-  }
-
-  void onSavedEmail(String email) {
-    _email = email;
-    update(['textfield-email']);
-  }
-
-  void onSavedPassword(String password) {
-    _password = password;
-    update(['textfield-password']);
-  }
+  bool autoValidate = false;
+  RxBool isLoading = false.obs;
 
   String validateEmail(String value) {
     Rule _emailRule = Rule(value,
@@ -74,34 +37,32 @@ class LoginController extends GetxController {
     return _passwordRule.hasError ? _passwordRule.error : null;
   }
 
-  void doLogin() async {
-    print(formKey.currentState.validate());
+  void executeLogin() async {
     if (formKey.currentState.validate()) {
       try {
-        Customer customer =
-            await _authenticationService.requestLogin(_email, _password);
-        appController.customer = customer;
-        Get.offAllNamed(AppRoutes.NAVIGATIONBAR);
+        isLoading.value = true;
+        Customer customer = await _authenticationService.requestLogin(
+            email.text, password.text);
+        appCtl.customer = customer;
+        appCtl.navigateToRoute(AppRoutes.NAVIGATIONBAR, removeStack: true);
       } on DioError catch (e) {
+        isLoading.value = false;
         if (e.response != null && e.response != null) {
           if (e.response.data is String) {
-            Get.dialog(AlertDialog(
-                title: TitleAlert(title: 'Ha ocurrido un error'),
-                content: Text(e.response.data)));
-          } else {
-            Get.dialog(AlertDialog(
-                title: TitleAlert(title: 'Ha ocurrido un error'),
+            Get.dialog(AlertDialogCC('Ha ocurrido un error',
                 content: Text(e.response.data['message'])));
+          } else {
+            Get.dialog(AlertDialogCC('Ha ocurrido un error',
+                content: AlertContentApiError(e.response.data)));
           }
         }
       } catch (e) {
-        print(e);
-        Get.dialog(AlertDialog(
-            title: TitleAlert(title: 'Ha ocurrido un error'),
-            content: Text(e.toString())));
+        isLoading.value = false;
+        Get.dialog(
+            AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
       }
     } else {
-      _autoValidate = true;
+      autoValidate = true;
     }
   }
 }

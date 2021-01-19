@@ -1,5 +1,3 @@
-import 'package:thor_flutter/app/data/model/customer.dart';
-import 'package:thor_flutter/app/data/model/message.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/setting.dart';

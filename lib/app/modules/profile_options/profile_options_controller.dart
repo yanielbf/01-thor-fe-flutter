@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
 
 class ProfileOptionsController extends GetxController {
-  final StoreRepo _storeRepo = Get.find<StoreRepo>();
   final AppController appController = Get.find<AppController>();
 
   @override

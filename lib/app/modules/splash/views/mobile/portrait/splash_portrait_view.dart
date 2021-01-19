@@ -1,6 +1,7 @@
 import 'package:thor_flutter/app/modules/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:thor_flutter/app/utils/constants.dart';
 
 class SplashPortraitView extends StatelessWidget {
   @override
@@ -18,10 +19,9 @@ class SplashPortraitView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset('assets/images/logo.png',
-                                width:
-                                    MediaQuery.of(context).size.width * 0.45),
-                            Text('v1.0')
+                            Image.asset(Constants.IMAGE_LOGO,
+                                width: MediaQuery.of(context).size.width *
+                                    Constants.IMAGE_LOGO_SIZE),
                           ],
                         )))));
       },

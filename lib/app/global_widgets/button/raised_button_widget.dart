@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:thor_flutter/app/theme/color_theme.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
 

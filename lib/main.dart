@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:thor_flutter/app/modules/splash/splash_binding.dart';

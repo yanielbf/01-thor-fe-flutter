@@ -43,6 +43,7 @@ class AppController extends GetxController {
       currencies = settings.currencies;
       mainCurrency = settings.currencies.firstWhere((e) => e.isMain == 1);
     } on DioError catch (e) {
+      print(e);
       if (e.response != null && e.response != null) {
         Get.dialog(AlertDialog(
             title: TitleAlert(title: 'Ha ocurrido un error'),
@@ -81,14 +82,22 @@ class AppController extends GetxController {
     }
   }
 
-  void navigateToRoute(String route,
-      {bool removeStack = false, dynamic arguments}) {
+  Future navigateToRoute(String route,
+      {bool removeStack = false,
+      bool removeStackPartial = false,
+      dynamic arguments}) {
     activeRoute = route;
     if (removeStack) {
-      Get.offAllNamed(route);
+      return Get.offAllNamed(route);
+    } else if (removeStackPartial) {
+      return Get.offNamed(route);
     } else {
-      Get.toNamed(route, arguments: arguments);
+      return Get.toNamed(route, arguments: arguments);
     }
+  }
+
+  void navigateBack({dynamic result}) {
+    Get.back(result: result);
   }
 
   void closeSession() {

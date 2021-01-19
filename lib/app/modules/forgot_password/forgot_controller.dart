@@ -1,98 +1,61 @@
-import 'package:thor_flutter/app/data/model/message.dart';
-import 'package:thor_flutter/app/data/repository/authentication_repo.dart';
-import 'package:thor_flutter/app/global_widgets/app/progress_indicator.dart';
-import 'package:thor_flutter/app/global_widgets/button/button_dialog.dart';
-import 'package:thor_flutter/app/global_widgets/error/content_error.dart';
-import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
-import 'package:thor_flutter/app/routes/app_routes.dart';
+import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:thor_flutter/app/data/model/message.dart';
+import 'package:thor_flutter/app/data/repository/authentication_repo.dart';
+import 'package:thor_flutter/app/global_widgets/alert/alert_content_api_error_widget.dart';
+import 'package:thor_flutter/app/modules/app/app_controller.dart';
+import 'package:thor_flutter/app/utils/validation.dart';
 import 'package:rules/rules.dart';
 
 class ForgotController extends GetxController {
   final AuthenticationRepo _authenticationRepo = Get.find<AuthenticationRepo>();
+  final AppController appCtl = Get.find<AppController>();
+  final GlobalKey<FormState> forgotPassFormKey = GlobalKey<FormState>();
 
-  TextEditingController _email = TextEditingController();
+  var emailController = TextEditingController();
+  bool autoValidate = false;
+  RxBool isLoading = false.obs;
 
-  Rule _emailRule;
-
-  RxString emailError = ''.obs;
-
-  TextEditingController get email => _email;
-
-  void onEmailChanged(String value) {
-    validateOnChange('email', value);
+  String validateEmail(String value) {
+    Rule _emailRule = Rule(value,
+        name: 'correo electrónico',
+        isRequired: true,
+        isEmail: true,
+        customErrors: validationMessages);
+    return _emailRule.hasError ? _emailRule.error : null;
   }
 
-  void validateOnChange(String field, value) {
-    _emailRule = Rule(
-      value,
-      name: 'Correo electrónico',
-      isRequired: true,
-      isEmail: true,
-    );
-    emailError.value = _emailRule.hasError ? _emailRule.error : '';
-  }
-
-  bool isValid() {
-    _emailRule = Rule(
-      _email.text,
-      name: 'Correo electrónico',
-      isRequired: true,
-      isEmail: true,
-    );
-    emailError.value = _emailRule.hasError ? _emailRule.error : '';
-    return emailError.value == '';
-  }
-
-  void doRecoveryPassword() async {
-    if (isValid()) {
-      ProggresIndicatorCC.processRequest();
+  void executeRecoveryPassword() async {
+    if (forgotPassFormKey.currentState.validate()) {
+      isLoading.value = true;
       try {
-        Message response =
-            await _authenticationRepo.requestForgotPassword(_email.text);
-        Get.back();
-        Get.dialog(AlertDialog(
-          title: TitleAlert(title: 'Todo ha ido bien'),
+        Message response = await _authenticationRepo
+            .requestForgotPassword(emailController.text);
+        isLoading.value = false;
+        Get.dialog(AlertDialogCC(
+          'Enhorabuena',
           content: Text(response.message),
-          actions: [ButtonDialog(title: 'Cerrar', callback: closeAndGoToLogin)],
         ));
       } on DioError catch (e) {
-        Get.back();
-        print(e);
+        isLoading.value = false;
         if (e.response != null && e.response != null) {
-          Get.dialog(AlertDialog(
-              title: TitleAlert(title: 'Ha ocurrido un error'),
-              content: ContentError(data: e.response.data)));
+          if (e.response.data is String) {
+            Get.dialog(AlertDialogCC('Ha ocurrido un error',
+                content: Text(e.response.data['message'])));
+          } else {
+            Get.dialog(AlertDialogCC('Ha ocurrido un error',
+                content: AlertContentApiError(e.response.data)));
+          }
         }
       } catch (e) {
-        Get.back();
-        print(e);
-        Get.dialog(AlertDialog(
-            title: TitleAlert(title: 'Ha ocurrido un error'),
-            content: Text(e.toString())));
+        isLoading.value = false;
+        Get.dialog(
+            AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
       }
+    } else {
+      autoValidate = true;
     }
-  }
-
-  void closeAndGoToLogin() {
-    Get.back();
-    navigateToLogin();
-  }
-
-  void navigateToRegister() async {
-    clearData();
-    Get.toNamed(AppRoutes.REGISTER);
-  }
-
-  void navigateToLogin() async {
-    clearData();
-    Get.toNamed(AppRoutes.LOGIN);
-  }
-
-  void clearData() {
-    _email.text = '';
-    emailError.value = '';
   }
 }

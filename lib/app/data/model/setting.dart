@@ -30,25 +30,14 @@ class Currency {
   int isMain;
   double exchangeRate;
 
-  Currency copyWith({
-    int id,
-    String name,
-    int isMain,
-    double exchangeRate,
-  }) =>
-      Currency(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        isMain: isMain ?? this.isMain,
-        exchangeRate: exchangeRate ?? this.exchangeRate,
-      );
-
-  factory Currency.fromJson(Map<String, dynamic> json) => Currency(
+  factory Currency.fromJson(Map<String, dynamic> json) {
+    return Currency(
         id: json["id"],
         name: json["name"],
         isMain: json["is_main"],
         exchangeRate: json["exchange_rate"].toDouble(),
       );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,

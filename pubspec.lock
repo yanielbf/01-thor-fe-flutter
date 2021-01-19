@@ -134,13 +134,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  downloads_path_provider:
-    dependency: "direct main"
-    description:
-      name: downloads_path_provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -277,6 +270,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.5"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.2+1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -385,6 +385,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  overlay:
+    dependency: "direct main"
+    description:
+      name: overlay
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   page_transition:
     dependency: "direct main"
     description:

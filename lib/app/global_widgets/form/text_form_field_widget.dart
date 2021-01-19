@@ -8,6 +8,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final String value;
   final Function(String) validator;
   final void Function(String) onChanged;
+  final TextEditingController controller;
 
   TextFormFieldWidget({
     @required this.hintText,
@@ -16,7 +17,8 @@ class TextFormFieldWidget extends StatelessWidget {
     this.prefixIcon,
     this.value,
     @required this.validator,
-    @required this.onChanged,
+    this.controller,
+    this.onChanged,
   });
 
   @override
@@ -27,8 +29,10 @@ class TextFormFieldWidget extends StatelessWidget {
       keyboardType: keyboardType,
       style: Theme.of(context).textTheme.bodyText2,
       autocorrect: false,
-//      controller: TextEditingController(text: value),
+      controller:
+          controller != null ? controller : TextEditingController(text: value),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(15),
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.subtitle2,
         prefixIcon: prefixIcon,

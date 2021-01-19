@@ -9,7 +9,7 @@ class NotificationHandler {
 
   static void initNotification(BuildContext context) {
     myContext = context;
-    var initAndroid = AndroidInitializationSettings('@mipmap/launcher_icon');
+    var initAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
     var initIOS = IOSInitializationSettings(
         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
     var initSetting =

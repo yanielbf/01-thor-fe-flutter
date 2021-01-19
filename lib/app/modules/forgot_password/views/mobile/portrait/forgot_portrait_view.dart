@@ -1,12 +1,12 @@
-import 'package:thor_flutter/app/modules/forgot_password/forgot_controller.dart';
-import 'package:thor_flutter/app/modules/forgot_password/views/mobile/portrait/local_widgets/button_recovery.dart';
-import 'package:thor_flutter/app/theme/color_theme.dart';
-import 'package:thor_flutter/app/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/state_manager.dart';
-import 'package:thor_flutter/app/modules/forgot_password/views/mobile/portrait/local_widgets/button_login.dart';
-import 'package:thor_flutter/app/modules/forgot_password/views/mobile/portrait/local_widgets/button_register.dart';
-import 'package:thor_flutter/app/modules/forgot_password/views/mobile/portrait/local_widgets/textfield_email.dart';
+import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
+import 'package:thor_flutter/app/global_widgets/app/loading_widget.dart';
+import 'package:thor_flutter/app/global_widgets/button/raised_button_widget.dart';
+import 'package:thor_flutter/app/global_widgets/form/text_form_field_widget.dart';
+import 'package:thor_flutter/app/modules/forgot_password/forgot_controller.dart';
+import 'package:thor_flutter/app/utils/constants.dart';
 
 class ForgotPortraitView extends StatelessWidget {
   @override
@@ -14,98 +14,88 @@ class ForgotPortraitView extends StatelessWidget {
     return GetBuilder<ForgotController>(
       builder: (_) {
         return Scaffold(
-            body: SingleChildScrollView(
+          appBar: AppBar(),
+          body: Stack(
+            children: [
+              Center(
                 child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            colors: ColorThemeCC.backgroundColorPrimary)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 60.0),
-                        Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text('La Cocina Cubana',
-                                  style: TextThemeCC.headerTextStyle
-                                      .merge(TextStyle(color: Colors.white))),
-                              Text('Recuperar contraseña',
-                                  style: TextThemeCC.subHeaderTextStyle
-                                      .merge(TextStyle(color: Colors.white))),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(60.0),
-                                  topRight: Radius.circular(60.0))),
-                          child: Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  height: 10.0,
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Form(
+                      key: _.forgotPassFormKey,
+                      child: Column(
+                        children: <Widget>[
+                          SideInAnimation(
+                            1,
+                            child: Center(
+                              child: Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      Constants.IMAGE_LOGO_SIMPLE,
+                                      width: MediaQuery.of(context).size.width *
+                                          Constants.IMAGE_LOGO_SIZE),
                                 ),
-                                Image.asset(
-                                  'images/logo.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.25,
-                                ),
-                                SizedBox(
-                                  height: 30.0,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color:
-                                                Color.fromRGBO(255, 95, 27, .3),
-                                            blurRadius: 20.0,
-                                            offset: Offset(0, 10))
-                                      ]),
-                                  child: Column(
-                                    children: [
-                                      TextFieldEmail(),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 60.0,
-                                ),
-                                SizedBox(
-                                  height: 40.0,
-                                ),
-                                ButtonRecovery(),
-                                SizedBox(
-                                  height: 60.0,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(child: ButtonLogin()),
-                                    SizedBox(width: 30.0),
-                                    Expanded(
-                                      child: ButtonRegister(),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 40.0,
-                                ),
-                              ],
+                              ),
                             ),
                           ),
-                        )
-                      ],
-                    ))));
+                          SizedBox(height: Constants.SPACING_S),
+                          SideInAnimation(
+                            2,
+                            child: Text('Recupera tu contraseña',
+                                style: Theme.of(context).textTheme.bodyText2),
+                          ),
+                          SizedBox(height: Constants.SPACING_M),
+                          SideInAnimation(
+                            3,
+                            child: TextFormFieldWidget(
+                              controller: _.emailController,
+                              obscureText: false,
+                              hintText: 'Correo electrónico',
+                              keyboardType: TextInputType.emailAddress,
+                              prefixIcon: Icon(FlutterIcons.mail_fea),
+                              validator: _.validateEmail,
+                            ),
+                          ),
+                          SizedBox(height: Constants.SPACING_M),
+                          SideInAnimation(
+                            4,
+                            child: RaisedButtonWidget(
+                              title: 'Recuperar contraseña',
+                              onPressed: () async {
+                                if (_.forgotPassFormKey.currentState
+                                    .validate()) {
+                                  _.forgotPassFormKey.currentState.save();
+                                  _.autoValidate = false;
+                                  _.executeRecoveryPassword();
+                                } else {
+                                  _.autoValidate = true;
+                                }
+                              },
+                            ),
+                          ),
+                          SizedBox(height: Constants.SPACING_S),
+                          SideInAnimation(
+                            4,
+                            child: RaisedButtonWidget(
+                              title: 'Acceder',
+                              onPressed: () {
+                                _.appCtl.navigateBack();
+                              },
+                            ),
+                          ),
+                          SizedBox(height: Constants.SPACING_S),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Obx(() => LoadingOverlay(
+                    isLoading: _.isLoading.value,
+                  )),
+            ],
+          ),
+        );
       },
     );
   }
