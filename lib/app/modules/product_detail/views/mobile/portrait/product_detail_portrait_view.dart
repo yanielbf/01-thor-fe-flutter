@@ -73,6 +73,21 @@ class ProductDetailPortraitView extends StatelessWidget {
                               ],
                             ),
                           ),
+                          SizedBox(height: Constants.SPACING_XS),
+                          _.product.realStock == 0
+                              ? SideInAnimation(3,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 3.0, horizontal: 10.0),
+                                    color: Colors.red,
+                                    child: Center(
+                                        child: Text('Agotado',
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                color: Colors.white))),
+                                  ))
+                              : Container(),
+                          SizedBox(height: Constants.SPACING_S),
                           SideInAnimation(3,
                               child: Row(
                                 children: [
@@ -173,21 +188,22 @@ class ProductDetailPortraitView extends StatelessWidget {
                 )),
           ],
         ),
-        floatingActionButton: _.product != null && !_.isLoading.value
-            ? FloatingActionButton.extended(
-                onPressed: () {
-                  _.executeProductToCart();
-                },
-                backgroundColor: kPrimaryColor,
-                label: Text(
-                  'Agregar al carrito',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: Colors.white),
-                ),
-              )
-            : Container(),
+        floatingActionButton:
+            _.product != null && _.product.realStock > 0 && !_.isLoading.value
+                ? FloatingActionButton.extended(
+                    onPressed: () {
+                      _.executeProductToCart();
+                    },
+                    backgroundColor: kPrimaryColor,
+                    label: Text(
+                      'Agregar al carrito',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .copyWith(color: Colors.white),
+                    ),
+                  )
+                : Container(),
       );
     });
   }

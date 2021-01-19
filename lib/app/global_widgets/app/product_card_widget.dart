@@ -94,7 +94,7 @@ class ProductCard extends StatelessWidget {
               ),
               product.discountPercentage > 0
                   ? Positioned(
-                      top: product.realStock > 0 ? 35.0 : 8.0,
+                      top: product.realStock == 0 ? 35.0 : 8.0,
                       left: 0.0,
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -129,7 +129,7 @@ class ProductCard extends StatelessWidget {
                   onPressed: () {},
                 ),
               ),
-              product.realStock > 0
+              product.realStock == 0
                   ? Positioned(
                       top: 8.0,
                       child: Container(
