@@ -12,7 +12,8 @@ class OrdersPortraitView extends StatelessWidget {
     return GetBuilder<OrdersController>(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Órdenes de compra"),
+          title: Text("Órdenes de compra",
+              style: Theme.of(context).textTheme.bodyText2),
           elevation: 0.0,
         ),
         body: _.orders != null && _.orders.length > 0

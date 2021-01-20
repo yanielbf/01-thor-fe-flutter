@@ -13,7 +13,8 @@ class BillsPortraitView extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           title: Obx(() => Text(
-              _.type.value == 'ordinary-invoice' ? "Facturas" : "Rembolsos")),
+              _.type.value == 'ordinary-invoice' ? "Facturas" : "Rembolsos",
+              style: Theme.of(context).textTheme.bodyText2)),
           elevation: 0.0,
           actions: [
             PopupMenuButton<Choice>(

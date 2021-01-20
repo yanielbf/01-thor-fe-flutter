@@ -1,8 +1,10 @@
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 class Bill {
   Bill({
     @required this.id,
+    @required this.reference,
     @required this.date,
     @required this.title,
     @required this.pdf,
@@ -11,6 +13,7 @@ class Bill {
   });
 
   int id;
+  String reference;
   String date;
   String title;
   String pdf;
@@ -19,7 +22,11 @@ class Bill {
 
   factory Bill.fromJson(Map<String, dynamic> json) => Bill(
         id: json["id"],
-        date: json["date"],
+        reference: json["reference"],
+        date: json["date"] != null
+            ? DateFormat('dd-MM-yyyy')
+                .format(DateFormat('yyyy-MM-dd').parse(json["date"]))
+            : null,
         title: json["title"],
         pdf: json["pdf"],
         totalAmount: json["totalAmount"],
@@ -28,6 +35,7 @@ class Bill {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "reference": reference,
         "date": date,
         "title": title,
         "pdf": pdf,

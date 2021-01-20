@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 class SaleOrder {
   SaleOrder({
     @required this.id,
+    @required this.reference,
     @required this.date,
     @required this.title,
     @required this.pdf,
@@ -13,6 +14,7 @@ class SaleOrder {
   });
 
   int id;
+  String reference;
   String date;
   String title;
   String pdf;
@@ -21,10 +23,13 @@ class SaleOrder {
   int totalItems;
 
   factory SaleOrder.fromJson(Map<String, dynamic> json) {
-    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     return SaleOrder(
       id: json["id"],
-      date: dateFormat.format(dateFormat.parse(json["date"])),
+      reference: json["reference"],
+      date: json["date"] != null
+          ? DateFormat('dd-MM-yyyy')
+              .format(DateFormat('yyyy-MM-dd').parse(json["date"]))
+          : null,
       title: json["title"],
       pdf: json["pdf"],
       totalAmount: json["totalAmount"],
@@ -36,6 +41,7 @@ class SaleOrder {
   Map<String, dynamic> toJson() => {
         "id": id,
         "date": date,
+        "reference": reference,
         "title": title,
         "pdf": pdf,
         "totalAmount": totalAmount,

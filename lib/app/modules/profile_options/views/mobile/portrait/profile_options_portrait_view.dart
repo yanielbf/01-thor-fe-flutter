@@ -161,26 +161,6 @@ class ProfileOptionsPortraitView extends StatelessWidget {
                             8,
                             child: ListTile(
                               onTap: () {
-                                _.appCtl.navigateToRoute(AppRoutes.DEVELOPERS);
-                              },
-                              leading: Icon(
-                                FlutterIcons.wrench_outline_mco,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              title: Text('Desarrolladores',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2
-                                      .copyWith(fontSize: 14.0)),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                              ),
-                            ),
-                          ),
-                          SideInAnimation(
-                            9,
-                            child: ListTile(
-                              onTap: () {
                                 _.closeSession();
                               },
                               leading: Icon(

@@ -29,7 +29,7 @@ class BillCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(bill.id.toString(),
+              Text(bill.reference.toString(),
                   style: Theme.of(context)
                       .textTheme
                       .headline3
