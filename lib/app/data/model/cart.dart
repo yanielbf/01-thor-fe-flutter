@@ -4,6 +4,7 @@ class Cart {
   Cart({
     @required this.tax,
     @required this.subtotalPrice,
+    @required this.discount,
     @required this.totalPrice,
     @required this.total,
     @required this.items,
@@ -12,12 +13,14 @@ class Cart {
   String tax;
   String subtotalPrice;
   String totalPrice;
+  String discount;
   int total;
   List<CartItem> items;
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
         tax: json["tax"],
         subtotalPrice: json["subtotalPrice"],
+        discount: json["discount"],
         totalPrice: json["totalPrice"],
         total: json["total"],
         items:
@@ -28,6 +31,7 @@ class Cart {
         "tax": tax,
         "subtotalPrice": subtotalPrice,
         "totalPrice": totalPrice,
+        "discount": discount,
         "total": total,
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
       };

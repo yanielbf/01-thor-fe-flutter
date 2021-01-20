@@ -91,7 +91,7 @@ class CartPortraitView extends StatelessWidget {
                                               .subtitle1),
                                     ],
                                   ),
-                                  SizedBox(height: 12.0),
+                                  SizedBox(height: Constants.SPACING_S),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -106,7 +106,22 @@ class CartPortraitView extends StatelessWidget {
                                               .subtitle1),
                                     ],
                                   ),
-                                  SizedBox(height: 12.0),
+                                  SizedBox(height: Constants.SPACING_S),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Descuento',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle2),
+                                      Text(_.cart.discount,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1),
+                                    ],
+                                  ),
+                                  SizedBox(height: Constants.SPACING_S),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -121,12 +136,12 @@ class CartPortraitView extends StatelessWidget {
                                               .subtitle1),
                                     ],
                                   ),
-                                  SizedBox(height: 12.0),
+                                  SizedBox(height: Constants.SPACING_S),
                                   Divider(
                                     color: Theme.of(context).accentColor,
                                     thickness: 1.0,
                                   ),
-                                  SizedBox(height: 12.0),
+                                  SizedBox(height: Constants.SPACING_S),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -180,7 +195,6 @@ class CartPortraitView extends StatelessWidget {
                               },
                             ),
                           ),
-                          SizedBox(height: 20.0),
                         ],
                       ),
                     ),

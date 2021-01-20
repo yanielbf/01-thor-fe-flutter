@@ -120,6 +120,7 @@ class CartController extends GetxController {
       checkoutCurrency = appCtl.mainCurrency;
       appCtl.totalCart.value = 0;
       update();
+      isLoading.value = false;
       Get.dialog(AlertDialogCC('Enhorabuena',
           content: Text('La orden de compra se realizó satisfactoriamente')));
     } on DioError catch (e) {
