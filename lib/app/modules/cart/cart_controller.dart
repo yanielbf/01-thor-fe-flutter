@@ -16,7 +16,7 @@ class CartController extends GetxController {
   Currency checkoutCurrency;
   Cart cart;
   String comments = '';
-  RxBool isLoading = false.obs;
+  RxBool isLoading = true.obs;
 
   @override
   void onReady() {
@@ -35,8 +35,8 @@ class CartController extends GetxController {
       isLoading.value = true;
       cart = await _storeRepo.requestCart(checkoutCurrency.id);
       appCtl.totalCart.value = cart.total;
-      isLoading.value = false;
       update();
+      isLoading.value = false;
     } on DioError catch (e) {
       isLoading.value = false;
       if (e.response.statusCode == 401) {

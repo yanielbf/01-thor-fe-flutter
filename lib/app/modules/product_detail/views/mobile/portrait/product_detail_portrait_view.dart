@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/loading_widget.dart';
 import 'package:thor_flutter/app/global_widgets/app/vertical_list_widget.dart';
 import 'package:thor_flutter/app/modules/product_detail/product_detail_controller.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
 import 'package:thor_flutter/app/utils/constants.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
@@ -22,7 +24,18 @@ class ProductDetailPortraitView extends StatelessWidget {
         appBar: AppBar(
           title: Text(_.product != null ? _.product.name : '',
               style: Theme.of(context).textTheme.bodyText2),
-          actions: [],
+          actions: [
+            IconButton(
+              icon: Obx(() {
+                return _.appCtl.totalCart.value > 0
+                    ? Icon(FlutterIcons.shopping_cart_ent, color: Colors.red)
+                    : Icon(FlutterIcons.shopping_cart_fea);
+              }),
+              onPressed: () {
+                _.executeGoToMain();
+              },
+            ),
+          ],
         ),
         body: Stack(
           children: [

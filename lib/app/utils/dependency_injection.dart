@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:thor_flutter/app/data/provider/local/authentication_local.dart';
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
+import 'package:thor_flutter/app/data/provider/local/store_local.dart';
 import 'package:thor_flutter/app/data/provider/remote/authentication_api.dart';
 import 'package:thor_flutter/app/data/provider/remote/common_api.dart';
 import 'package:thor_flutter/app/data/provider/remote/document_api.dart';
@@ -21,10 +22,9 @@ import 'constants.dart';
 class DependencyInjection {
   static void init() {
     Get.lazyPut<LauncherUrl>(() => LauncherUrl(), fenix: true);
-
     Get.lazyPut<GetStorage>(() => GetStorage('THOR_STORAGE'), fenix: true);
-
     Get.lazyPut<AuthenticationLocal>(() => AuthenticationLocal(), fenix: true);
+    Get.lazyPut<StoreLocal>(() => StoreLocal(), fenix: true);
 
     Get.lazyPut<Dio>(() {
       Dio dio = Dio(BaseOptions(

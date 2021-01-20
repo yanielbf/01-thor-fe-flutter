@@ -13,7 +13,6 @@ class AppController extends GetxController {
       Get.find<AuthenticationLocal>();
   final CommonRepo _commonRepo = Get.find<CommonRepo>();
 
-  RxInt activeRouteBottomBar = 0.obs;
   String activeRoute = AppRoutes.MAIN;
   Customer customer;
   Setting settings;
@@ -57,31 +56,6 @@ class AppController extends GetxController {
     }
   }
 
-  void navigateFromBottomBar(int index) {
-    switch (index) {
-      case 0:
-        activeRoute = AppRoutes.MAIN;
-        activeRouteBottomBar.value = index;
-        Get.toNamed(AppRoutes.MAIN);
-        break;
-      case 1:
-        activeRoute = AppRoutes.MAIN;
-        activeRouteBottomBar.value = index;
-        Get.toNamed(AppRoutes.MAIN);
-        break;
-      case 2:
-        Get.toNamed(AppRoutes.MAIN);
-        activeRoute = AppRoutes.MAIN;
-        activeRouteBottomBar.value = index;
-        break;
-      case 3:
-        activeRoute = AppRoutes.PROFILE_OPTIONS;
-        activeRouteBottomBar.value = index;
-        Get.toNamed(AppRoutes.PROFILE_OPTIONS);
-        break;
-    }
-  }
-
   Future navigateToRoute(String route,
       {bool removeStack = false,
       bool removeStackPartial = false,
@@ -94,6 +68,10 @@ class AppController extends GetxController {
     } else {
       return Get.toNamed(route, arguments: arguments);
     }
+  }
+
+  Future navigateToMain(int nextCurrentTab) {
+    return Get.toNamed(AppRoutes.NAVIGATIONBAR);
   }
 
   void navigateBack({dynamic result}) {

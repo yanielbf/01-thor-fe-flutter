@@ -2,12 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thor_flutter/app/data/model/product.dart';
+import 'package:thor_flutter/app/data/provider/local/store_local.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
+import 'package:thor_flutter/app/modules/navigationbar/bottom_navigation_controller.dart';
+import 'package:thor_flutter/app/routes/app_routes.dart';
 
 class ProductDetailController extends GetxController {
   final AppController appCtl = Get.find<AppController>();
+  final BottomNavigationBarController navBarCtl =
+      Get.find<BottomNavigationBarController>();
+  final StoreLocal storeLocal = Get.find<StoreLocal>();
   final StoreRepo _storeRepo = Get.find<StoreRepo>();
 
   Product product;
@@ -78,4 +84,11 @@ class ProductDetailController extends GetxController {
           AlertDialogCC('Ha ocurrido un error', content: Text(e.toString())));
     }
   }
+
+  Future<void> executeGoToMain() async {
+    await storeLocal.setStore('active-tab-in-main', 1.toString());
+    appCtl.navigateToRoute(AppRoutes.NAVIGATIONBAR);
+  }
 }
+
+class _ {}
