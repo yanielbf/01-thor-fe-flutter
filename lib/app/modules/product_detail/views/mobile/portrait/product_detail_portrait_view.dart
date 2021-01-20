@@ -11,7 +11,6 @@ import 'package:thor_flutter/app/global_widgets/animation/side_animation.dart';
 import 'package:thor_flutter/app/global_widgets/app/loading_widget.dart';
 import 'package:thor_flutter/app/global_widgets/app/vertical_list_widget.dart';
 import 'package:thor_flutter/app/modules/product_detail/product_detail_controller.dart';
-import 'package:thor_flutter/app/routes/app_routes.dart';
 import 'package:thor_flutter/app/utils/colors.dart';
 import 'package:thor_flutter/app/utils/constants.dart';
 import 'package:thor_flutter/app/utils/screens.dart';
@@ -159,16 +158,18 @@ class ProductDetailPortraitView extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
+                          SizedBox(height: Constants.SPACING_XS),
                           FadeInAnimation(
                             5,
                             child: ReadMoreText(
                               _.product.description,
+                              textAlign: TextAlign.justify,
                               trimLines: 4,
                               colorClickableText:
                                   Theme.of(context).primaryColor,
                               trimMode: TrimMode.Line,
-                              trimCollapsedText: '\n...Show more',
-                              trimExpandedText: '\nshow less',
+                              trimCollapsedText: '\n...Ver más',
+                              trimExpandedText: '\Ver menos',
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),

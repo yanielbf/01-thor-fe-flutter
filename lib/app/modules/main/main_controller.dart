@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import 'package:thor_flutter/app/data/provider/firebase/firebase_notification_ha
 import 'package:thor_flutter/app/data/provider/local/launch_url.dart';
 import 'package:thor_flutter/app/data/repository/store_repo.dart';
 import 'package:thor_flutter/app/global_widgets/app/alert_dialog_widget.dart';
-import 'package:thor_flutter/app/global_widgets/error/title_error.dart';
 import 'package:thor_flutter/app/modules/app/app_controller.dart';
 import 'package:thor_flutter/app/routes/app_routes.dart';
 
