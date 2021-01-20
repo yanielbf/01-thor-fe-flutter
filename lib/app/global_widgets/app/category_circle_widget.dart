@@ -24,7 +24,7 @@ class CategoryCircle extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(12.0),
               width: 70.0,
               height: 70.0,
               child: Center(

@@ -7,6 +7,7 @@ import 'package:thor_flutter/app/modules/splash/splash_page.dart';
 import 'package:thor_flutter/app/routes/app_pages.dart';
 import 'package:thor_flutter/app/theme/theme.dart';
 import 'package:thor_flutter/app/utils/dependency_injection.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class HttpOverridesCustom extends HttpOverrides {
   @override
@@ -21,6 +22,7 @@ void main() async {
   HttpOverrides.global = new HttpOverridesCustom();
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.init();
+  //DefaultCacheManager().emptyCache();
   await GetStorage.init('THOR_STORAGE');
   runApp(App());
 }
